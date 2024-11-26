@@ -42,7 +42,7 @@ describe("/posts", () => {
   describe("POST, when a valid token is present", () => {
     test("responds with a 201", async () => {
       const response = await request(app)
-        .post("/posts")
+        .post("/posts/createpost")
         .set("Authorization", `Bearer ${token}`)
         .send({ message: "Hello World!" });
       expect(response.status).toEqual(201);
@@ -50,7 +50,7 @@ describe("/posts", () => {
 
     test("creates a new post", async () => {
       await request(app)
-        .post("/posts")
+        .post("/posts/createpost")
         .set("Authorization", `Bearer ${token}`)
         .send({ message: "Hello World!!" });
 
@@ -62,7 +62,7 @@ describe("/posts", () => {
     test("returns a new token", async () => {
       const testApp = request(app);
       const response = await testApp
-        .post("/posts")
+        .post("/posts/createpost")
         .set("Authorization", `Bearer ${token}`)
         .send({ message: "hello world" });
 
@@ -130,8 +130,8 @@ describe("/posts", () => {
       const firstPost = posts[0];
       const secondPost = posts[1];
 
-      expect(firstPost.message).toEqual("howdy!");
-      expect(secondPost.message).toEqual("hola!");
+      expect(firstPost.message).toEqual("hola!");
+      expect(secondPost.message).toEqual("howdy!");
     });
 
     test("returns a new token", async () => {
