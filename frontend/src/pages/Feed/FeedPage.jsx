@@ -35,7 +35,9 @@ export function FeedPage() {
   return (
     <>
       <h2>Posts</h2>
-      <Link to="/createpost">Write post</Link>
+      <Link to="/createpost"><button>Write post</button></Link>
+      <br/>
+      <br/>
       <div className="feed" role="feed">
         {posts.map((post) => (
           <Post post={post} key={post._id} />

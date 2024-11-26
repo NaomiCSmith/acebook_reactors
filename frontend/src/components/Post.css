@@ -1,0 +1,9 @@
+.post{
+    border: 1px solid black;
+    margin: 10px auto;
+    border-radius: 10px;
+}
+
+.post article{
+    margin-bottom: 10px;
+}

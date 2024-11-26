@@ -1,9 +1,10 @@
 /* file: LikeButton.css */
 
 .LikeButton {
-    padding: 10px 20px;
-    font-size: 20px;
+    padding: 5px 15px;
+    font-size: 15px;
     border: none;
+    border-radius: 20px;
     background-color: orchid;
     color: white;
     cursor: pointer;
