@@ -1,0 +1,21 @@
+/* file: LikeButton.css */
+
+.LikeButton {
+    padding: 10px 20px;
+    font-size: 20px;
+    border: none;
+    background-color: orchid;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.LikeButton:hover {
+    background-color: mediumorchid;
+    color: white;
+}
+
+.LikeButton.isLiked {
+    background-color:  darkorchid;
+    color: white;
+}
