@@ -5,7 +5,7 @@ function Post(props) {
   return (
   <div className="post">
   <article key={props.post._id}>{props.post.message}</article>
-  <LikeButton />
+  <LikeButton post={props.post}/>
   <br />
   </div>
   )

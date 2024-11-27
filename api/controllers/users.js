@@ -17,8 +17,25 @@ function create(req, res) {
     });
 }
 
+function findByEmail(req, res) {
+  const {email} = req.params
+
+  User.findOne({ email })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.status(200).json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ message: "Something went wrong" });
+    });
+}
+
 const UsersController = {
   create: create,
+  findByEmail: findByEmail,
 };
 
 module.exports = UsersController;

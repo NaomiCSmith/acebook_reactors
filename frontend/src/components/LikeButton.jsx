@@ -1,35 +1,53 @@
-// file: LikeButton.jsx
-
-import React, { useState } from "react";
+import { useState } from "react";
 import "./LikeButton.css";
+import { likePost, unLikePost } from "../services/posts";
 
-// like button so each post can be liked
+const LikeButton = ({post}) => {    
+    const userID = localStorage.getItem('userID')
+    const [likes, setLikes] = useState(post.likes || 0);
+    const [isLiked, setIsLiked] = useState(post.likedBy.includes(userID))
+    const [error, setError] = useState(null);
 
-const LikeButton = () => {
-
-    // like state
-    const [likes, setLikes] = useState(0);
-    const [isLiked, setIsLiked] = useState(false)
-
-    // change like status on post
-    const changeLike = () => {
+    const changeLike = async () => {   
+        setError(null);     
         if (isLiked) {
-            setLikes(likes - 1);
-            setIsLiked(false);
+            try {
+                const response = await unLikePost(post._id, userID);
+                if (response.message === "Post Un-liked") {
+                    
+                    setLikes(response.likes);
+                    setIsLiked(false);
+                } else {
+                    setError(response.message || "Failed to un-like the post.");
+                }
+            } catch (error) {
+                setError("Failed to un-like the post.");
+            }
         } else {
-            setLikes(likes + 1);
-            setIsLiked(true);
+            try {
+                const response = await likePost(post._id, userID);
+                console.log("RESPONSE HERE: ", response);
+                
+                if (response.message === "Post liked") {
+                    setLikes(response.likes);
+                    setIsLiked(true);
+                } else {
+                setError(response.message || "Failed to like the post.");
+                }
+            } catch (error) {
+                setError("Failed to like the post.");
+            }
         }
     };
 
-    // returns like button with updated like count
     return (
         <div>
-            <span>{likes} {likes === 1? 'like' : 'likes'}</span>
+            <span>{likes} {likes === 1? 'like' : 'likes'}</span> 
             <br></br>
             <button className={`LikeButton ${isLiked ? "isLiked" : ""}`} onClick={changeLike}>
                 {isLiked ? 'Liked' : 'Like'}
             </button>
+            {error && <p>{error}</p>}
         </div>
     );
 };

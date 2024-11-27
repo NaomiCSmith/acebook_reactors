@@ -22,6 +22,7 @@ app.use("/users", usersRouter);
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/createpost", postsRouter);
+app.use("/like:id", postsRouter)
 
 // 404 Handler
 app.use((_req, res) => {
