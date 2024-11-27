@@ -42,3 +42,48 @@ export async function createPost(token, postData) {
   
   return data;
 }
+
+export async function likePost(postId) {
+  const token = localStorage.getItem("token");
+  console.log(postId);
+  
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  const response = await fetch(`${BACKEND_URL}/posts/like/${postId}`, requestOptions);
+  
+  if (!response.ok) {
+    throw new Error("Failed to like the post");
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+export async function unLikePost(postId, userId) {
+  const token = localStorage.getItem("token");
+  
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId })
+  };
+
+  const response = await fetch(`${BACKEND_URL}/posts/unlike/${postId}`, requestOptions);
+  
+  if (!response.ok) {
+    throw new Error("Failed to un-like the post");
+  }
+
+  const data = await response.json();
+  return data;
+}
+
