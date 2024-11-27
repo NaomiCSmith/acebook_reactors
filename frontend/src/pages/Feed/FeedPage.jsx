@@ -5,7 +5,7 @@ import { getPosts } from "../../services/posts";
 import Post from "../../components/Post";
 import LogoutButton from "../../components/LogoutButton";
 import Header from "../Header/Header";
-import Sidebar from "../Header/Sidebar";
+// import Sidebar from "../Header/Sidebar";
 
 export function FeedPage() {
   const [posts, setPosts] = useState([]);
@@ -37,8 +37,8 @@ export function FeedPage() {
   return (
     <>
       <div>
-        {/* <Header /> */}
-        <Sidebar />
+        <Header />
+        {/* <Sidebar /> */}
       </div>
       <h2>Posts</h2>
       <Link to="/createpost"><button>Write post</button></Link>
