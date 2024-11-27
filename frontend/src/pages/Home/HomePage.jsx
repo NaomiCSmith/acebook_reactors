@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo-acebook.svg";
-import { useState } from 'react'
 import "./HomePage.css";
 
 export function HomePage() {
   return (
     <>
- 
     <div className="home">
       <div className="welcome-container">
         <img src={logo} alt="Acebook Logo" className="logo" />
