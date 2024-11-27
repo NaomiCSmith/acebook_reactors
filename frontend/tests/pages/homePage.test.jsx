@@ -4,16 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import { HomePage } from "../../src/pages/Home/HomePage";
 
 describe("Home Page", () => {
-  test("welcomes you to the site", () => {
-    // We need the Browser Router so that the Link elements load correctly
+  test("Shows the site tagline", () => {
     render(
       <BrowserRouter>
         <HomePage />
       </BrowserRouter>
     );
-
-    const heading = screen.getByRole("heading");
-    expect(heading.textContent).toEqual("Welcome to Acebook!");
+    const tagline = screen.getByText("Connect and share with the devs in your life, Acebook style.");
+    expect(tagline).not.toBeNull()
   });
 
   test("Displays a signup link", async () => {
@@ -23,7 +21,7 @@ describe("Home Page", () => {
       </BrowserRouter>
     );
 
-    const signupLink = screen.getByText("Sign Up");
+    const signupLink = screen.getByText("Create New Account");
     expect(signupLink.getAttribute("href")).toEqual("/signup");
   });
 
