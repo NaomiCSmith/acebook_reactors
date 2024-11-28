@@ -1,0 +1,47 @@
+img{
+width: 25px;
+height: 25px;
+}
+
+img:hover{
+    cursor: pointer;
+}
+
+.add-comment {
+    padding: 5px 15px;
+    font-size: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: orchid;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-comment:hover {
+    background-color: mediumorchid;
+    color: white;
+}
+
+.post-comment {
+    padding: 5px 15px;
+    font-size: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: orchid;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.post-comment:hover {
+    background-color: mediumorchid;
+    color: white;
+}
+
+.comment-container{
+    border: 1px solid black;
+    margin: 5px auto;
+    border-radius: 8px;
+    width: 60%;
+}

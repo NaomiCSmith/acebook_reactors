@@ -1,12 +1,23 @@
 const Post = require("../models/post");
 const { generateToken } = require("../lib/token");
 const mongoose = require('mongoose');
+const Comment = require("../models/comment");
+
 
 
 async function getAllPosts(req, res) {
   const posts = await Post.find().sort({createdAt: -1});
   const token = generateToken(req.user_id);
-  res.status(200).json({ posts: posts, token: token });
+  const postsWithCommentCount = await Promise.all(
+    posts.map(async (post) => {
+        const commentCount = await Comment.countDocuments({ postId: post._id });
+        return {
+            ...post._doc,  // Include all other post data
+            commentCount: commentCount  // Add the comment count
+        };
+    })
+  );
+  res.status(200).json({ posts: postsWithCommentCount, token: token });
 }
 
 async function createPost(req, res) {
@@ -16,8 +27,6 @@ async function createPost(req, res) {
   const newToken = generateToken(req.user_id);
   res.status(201).json({ message: "Post created", token: newToken });
 }
-
-// const Post = require("../models/post");
 
 async function likePost(req, res) {
   
