@@ -3,7 +3,7 @@ import "./profile.css";
 import defaultAvatar from "../../assets/default-avatar.png"; // Import the avatar
 
 
-const Profile = () => {
+export const Profile = () => {
   // Placeholder user data
   const user = {
     username: "JohnDoe",
@@ -58,5 +58,3 @@ const Profile = () => {
     </>
   );
 };
-
-export default Profile;
