@@ -16,7 +16,7 @@ export function LoginPage() {
       navigate("/welcome");
     } catch (err) {
       console.error(err);
-      navigate("/welcome");
+      navigate("/login");
     }
   }
 
