@@ -1,0 +1,51 @@
+.welcome {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    }
+
+.profile-button,
+.posts-button,
+.create-post-button {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+}
+
+.profile-button {
+    background-color: rgb(6, 204, 102);
+}
+
+.profile-button:hover {
+    background-color: rgb(4, 181, 89);
+    color: white;
+}
+
+.posts-button {
+    background-color: #ff2d65;
+}
+
+.posts-button:hover {
+    background-color: #f00c49;
+    color: white;
+}
+
+.create-post-button {
+    background-color: #ffd700;
+}
+
+.create-post-button:hover {
+    background-color: #febe10;
+    color: white;
+}

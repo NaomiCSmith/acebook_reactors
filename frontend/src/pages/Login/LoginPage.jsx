@@ -17,7 +17,7 @@ export function LoginPage() {
       const userID = await getUserByEmail(token,email)
       localStorage.setItem("token", token);
       localStorage.setItem("userID", userID._id);
-      navigate("/posts");
+      navigate("/welcome");
     } catch (err) {
       console.error(err);
       navigate("/login");
