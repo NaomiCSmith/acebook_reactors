@@ -1,4 +1,92 @@
+/* .home {
+  display: flex;
+  flex-direction: column;
+} */
+
+/* General Styles */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #f0f2f5;
+}
+
+/* Home Page Container */
 .home {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+/* Welcome Section */
+.welcome-container {
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 48px;
+  width: 50%;
+  font-weight: bold;
+  color: #1877f2;
+}
+
+.tagline {
+  font-size: 16px;
+  color: #606770;
+  margin: 10px 0;
+}
+
+/* Button Section */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.signup-button,
+.login-button {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #ff2d65;
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 200px;
+  text-align: center;
+}
+
+.signup-button {
+  background-color: rgb(6, 204, 102);
+}
+
+.signup-button:hover {
+  background-color: rgb(4, 181, 89);
+  color: white;
+}
+
+.login-button:hover {
+  background-color: #f00c49;
+  color: white;
+}
+
+.auth-form {
+  max-width: 400px;
+  border-radius: 0; /* Remove rounded corners for a sharper look */
+}
+
+.auth-form button {
+  border-radius: 0; /* Ensure buttons are squared off */
+}
+
+.auth-form .btn-link {
+  text-decoration: none;
+  color: #007bff; /* Default Bootstrap link color */
+}
+
+.auth-form .btn-link:hover {
+  text-decoration: underline;
 }

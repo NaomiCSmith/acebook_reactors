@@ -14,12 +14,23 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   min-width: 320px;
   min-height: 100vh;
+  font-family: inherit; /* Ensure consistent font styling */
+  background-color: #f8f9fa; /* Optional: light background */
+}
+
+/* Remove flex from body to allow normal layout flow */
+body > * {
+  display: block; /* Default block flow */
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+/* Optional: Ensure consistent spacing globally */
+.container-fluid {
+  padding: 20px;
 }

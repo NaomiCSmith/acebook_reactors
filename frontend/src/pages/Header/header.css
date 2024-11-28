@@ -1,0 +1,15 @@
+.navbar {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Prevent collapsing too early */
+.navbar-toggler {
+  display: none !important; /* Hide the hamburger menu */
+}
+
+@media (max-width: 768px) {
+  .navbar-toggler {
+    display: block !important; /* Show the hamburger menu below 768px */
+  }
+}
