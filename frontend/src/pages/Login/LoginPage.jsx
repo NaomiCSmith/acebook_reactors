@@ -13,10 +13,10 @@ export function LoginPage() {
     try {
       const token = await login(email, password);
       localStorage.setItem("token", token);
-      navigate("/posts");
+      navigate("/welcome");
     } catch (err) {
       console.error(err);
-      navigate("/login");
+      navigate("/welcome");
     }
   }
 
