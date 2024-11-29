@@ -36,3 +36,24 @@ export async function createComment(token, commentData) {
         
         return data;
 }
+
+export const deleteComment = async (token, commentId) => {
+    const response = await fetch(`${BACKEND_URL}/comments/${commentId}`
+, {
+    method: "DELETE",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    },
+    });
+
+    if (!response.ok) {
+        const errorMessage = await response.json();
+        console.error("Error deleting comment:", errorMessage);
+        throw new Error("Failed to delete the comment.");
+    }
+
+    return response.json();
+};
+
+

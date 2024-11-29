@@ -12,8 +12,8 @@ async function getAllPosts(req, res) {
     posts.map(async (post) => {
         const commentCount = await Comment.countDocuments({ postId: post._id });
         return {
-            ...post._doc,  // Include all other post data
-            commentCount: commentCount  // Add the comment count
+            ...post._doc,
+            commentCount: commentCount
         };
     })
   );
@@ -79,12 +79,30 @@ async function unLikePost(req, res) {
   }
 }
 
+async function deletePost(req, res) {
+  const postId = req.params.id;
+
+  try {
+    const deletedPost = await Post.findByIdAndDelete(postId);
+
+    if (!deletedPost) {
+        return res.status(404).json({ message: "Post not found" });
+    }
+    const newToken = generateToken(req.user_id);
+    res.status(200).json({ message: "Post deleted successfully", token: newToken });
+} catch (error) {
+    console.error("Error deleting post:", error);
+    res.status(500).json({ message: "Internal server error" });
+}
+}
+
 
 const PostsController = {
   getAllPosts: getAllPosts,
   createPost: createPost,
   likePost: likePost,
   unLikePost: unLikePost,
+  deletePost: deletePost,
 };
 
 module.exports = PostsController;

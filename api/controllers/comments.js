@@ -11,7 +11,6 @@ const comment = new Comment({ postId, userId, message });
 comment
     .save()
     .then((comment) => {
-        // console.log("Comment created, id:", comment._id.toString());
         res.status(201).json({ message: "OK" });
     })
     .catch((err) => {
@@ -34,10 +33,26 @@ async function getAllComments(req, res) {
 }
 }
 
+const deleteAComment = async (req, res) => {
+    const commentId = req.params.commentId;
+    try {
+        const comment = await Comment.findById(commentId);
+        if (!comment) {
+            return res.status(404).json({ message: "Comment not found" });
+        }
+        await Comment.findByIdAndDelete(commentId);
+        return res.status(200).json({ message: "Comment deleted successfully." });
+        } catch (error) {
+        console.error("Error deleting comment:", error);
+        return res.status(500).json({ message: "Server error" });
+    }
+};
+
 
 const CommentsController = {
     create: create,
     getAllComments: getAllComments,
+    deleteAComment: deleteAComment,
 };
 
 module.exports = CommentsController

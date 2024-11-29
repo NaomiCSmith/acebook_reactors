@@ -62,13 +62,17 @@ const CommentButton = ({ post, userID, token }) => {
         }
     };
 
+    const handleCommentDeleted = (commentId) => {
+        setCommentsData(prevComments => prevComments.filter(comment => comment._id !== commentId));
+        post.commentCount -= 1; 
+    };
+
     return (
         <div>
             <img
                 src="../chat.png"
                 alt="comment speech bubble"
                 onClick={seeComments}
-                style={{ cursor: "pointer" }}
             />
             {post.commentCount} {post.commentCount === 1 ? "Comment" : "Comments"}
 
@@ -77,7 +81,7 @@ const CommentButton = ({ post, userID, token }) => {
                     {commentsData.length > 0 ? (
                         commentsData.map((comment) => (
                             <div className="comment-container" key={comment._id}>
-                                <Comment comment={comment} userID={userID} />
+                                <Comment comment={comment} userID={userID} token={token} onCommentDeleted={handleCommentDeleted}/>
                             </div>
                         ))
                     ) : (

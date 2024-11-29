@@ -27,11 +27,6 @@ app.use("/like:id", postsRouter)
 app.use("/createcomment", commentsRouter)
 app.use("/comments", commentsRouter)
 
-// app.use((req, res, next) => {
-//   console.log(`Incoming Request: ${req.method} ${req.url}`);
-//   next();
-// });
-
 // 404 Handler
 app.use((_req, res) => {
   res.status(404).json({ err: "Error 404: Not Found" });
