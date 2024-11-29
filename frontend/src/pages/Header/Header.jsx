@@ -9,6 +9,9 @@ const Header = () => {
 
   function handleLogout() {
     localStorage.removeItem("token"); // Remove the token to log out
+    localStorage.removeItem("email");
+    localStorage.removeItem("userID");
+    localStorage.removeItem("userId");
     navigate("/"); // Redirect to the homepage or login page
   }
 

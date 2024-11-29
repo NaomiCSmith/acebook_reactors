@@ -21,6 +21,7 @@ const CommentButton = ({ post, userID, token }) => {
         if (!viewComments) {
             try {
                 const response = await getComments(token, post._id, userID);
+                
                 if (response) {
                     setCommentsData(response.comments);
                     setError(null); 
@@ -47,7 +48,7 @@ const CommentButton = ({ post, userID, token }) => {
                 setCommentContent('');
                 setError(null);
 
-                setCommentsData([...commentsData, { _id: new Date().toISOString(), message: commentContent }]);
+                setCommentsData([...commentsData, { _id: new Date().toISOString(), message: commentContent, userId: userID }]);
                 post.commentCount += 1; 
             } else {
                 setError("Failed to create comment. Please try again.");
@@ -76,7 +77,7 @@ const CommentButton = ({ post, userID, token }) => {
                     {commentsData.length > 0 ? (
                         commentsData.map((comment) => (
                             <div className="comment-container" key={comment._id}>
-                                <Comment comment={comment} />
+                                <Comment comment={comment} userID={userID} />
                             </div>
                         ))
                     ) : (

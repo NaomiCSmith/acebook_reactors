@@ -29,10 +29,9 @@ async function createPost(req, res) {
 }
 
 async function likePost(req, res) {
-  
   try {
     const postId = req.params.id;
-    const userId = req.user_id;
+    const userID = req.headers['userid'];
   
     const post = await Post.findById(postId);
 
@@ -40,11 +39,11 @@ async function likePost(req, res) {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    if (post.likedBy.includes(userId)) {
+    if (post.likedBy.includes(userID)) {
       return res.status(400).json({ message: "User has already liked this post." });
     }
 
-    post.likedBy.push(userId);
+    post.likedBy.push(userID);
     post.likes += 1;
     await post.save();
     res.status(200).json({ message: "Post liked", likes:post.likes });
@@ -56,11 +55,10 @@ async function likePost(req, res) {
 }
 
 async function unLikePost(req, res) {
-  
   try {
     const postId = req.params.id;
-    const userId = req.body.userId;
-    const ObjectId = new mongoose.Types.ObjectId(userId);
+    const userID = req.headers['userid'];
+    const ObjectId = new mongoose.Types.ObjectId(userID);
     
     const post = await Post.updateOne(
       { _id: postId },
