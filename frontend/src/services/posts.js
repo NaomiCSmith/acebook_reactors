@@ -86,3 +86,19 @@ export async function unLikePost(postId, userID) {
   return data;
 }
 
+export async function deletePost(postId) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${BACKEND_URL}/posts/${postId}`, {
+      method: "DELETE",
+      headers: {
+          Authorization: `Bearer ${token}`,
+      },
+  });
+
+  if (!response.ok) {
+      throw new Error("Failed to delete post");
+  }
+
+  return await response.json();
+}

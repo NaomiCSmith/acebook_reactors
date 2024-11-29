@@ -5,9 +5,7 @@ import { getPosts } from "../../services/posts";
 import Post from "../../components/Post";
 import LogoutButton from "../../components/LogoutButton";
 import Header from "../Header/Header";
-// import Sidebar from "../Header/Sidebar";
-
-import "./feedpage.css"; // Import the new CSS file
+import "./feedpage.css"; 
 
 export function FeedPage() {
   const [posts, setPosts] = useState([]);
@@ -35,13 +33,15 @@ export function FeedPage() {
     return;
   }
 
+const handlePostDeleted = (postId) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
+};
   return (
     <>
       <div>
         <Header />
-        {/* <Sidebar /> */}
       </div>
-      <div className="feed-container"> {/* Add a wrapper for the feed */}
+      <div className="feed-container">
         <h2 className="text-center">Posts</h2>
         <div className="action-buttons text-center">
           <Link to="/createpost">
@@ -52,7 +52,7 @@ export function FeedPage() {
         <div className="feed" role="feed">
           {posts.map((post) => (
             <div className="post-wrapper" key={post._id}>
-              <Post post={post} />
+              <Post post={post} onPostDeleted={handlePostDeleted} />
             </div>
           ))}
         </div>

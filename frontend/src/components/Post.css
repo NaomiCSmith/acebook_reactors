@@ -22,3 +22,28 @@
 .comment {
     flex: 1;
 }
+
+.delete {
+    padding: 5px 15px;
+    font-size: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: orchid;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width:auto;
+    height:auto;
+    display: inline-block
+}
+
+.delete:hover {
+    background-color: mediumorchid;
+    color: white;
+}
+
+.author-delete-container{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
