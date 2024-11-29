@@ -38,14 +38,12 @@ export async function createPost(token, postData) {
   }
 
   const data = await response.json();
-  console.log("RESPONSE DATA: ", data);
   
   return data;
 }
 
 export async function likePost(postId) {
   const token = localStorage.getItem("token");
-  console.log(postId);
   
   const requestOptions = {
     method: "PUT",

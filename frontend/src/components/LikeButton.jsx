@@ -2,8 +2,7 @@ import { useState } from "react";
 import "./LikeButton.css";
 import { likePost, unLikePost } from "../services/posts";
 
-const LikeButton = ({post}) => {    
-    const userID = localStorage.getItem('userID')
+const LikeButton = ({post, userID}) => {    
     const [likes, setLikes] = useState(post.likes || 0);
     const [isLiked, setIsLiked] = useState(post.likedBy.includes(userID))
     const [error, setError] = useState(null);
