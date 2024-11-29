@@ -42,7 +42,7 @@ export async function createPost(token, postData) {
   return data;
 }
 
-export async function likePost(postId) {
+export async function likePost(postId, userID) {
   const token = localStorage.getItem("token");
   
   const requestOptions = {
@@ -50,6 +50,7 @@ export async function likePost(postId) {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      userid: userID
     },
   };
 
@@ -63,7 +64,7 @@ export async function likePost(postId) {
   return data;
 }
 
-export async function unLikePost(postId, userId) {
+export async function unLikePost(postId, userID) {
   const token = localStorage.getItem("token");
   
   const requestOptions = {
@@ -71,8 +72,8 @@ export async function unLikePost(postId, userId) {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      userid: userID
     },
-    body: JSON.stringify({ userId })
   };
 
   const response = await fetch(`${BACKEND_URL}/posts/unlike/${postId}`, requestOptions);

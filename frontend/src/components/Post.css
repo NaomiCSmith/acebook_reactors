@@ -8,3 +8,17 @@
 .post article{
     margin-bottom: 10px;
 }
+
+.like-comment-container{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.like {
+    flex: 1;
+}
+
+.comment {
+    flex: 1;
+}

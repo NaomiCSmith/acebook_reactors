@@ -4,6 +4,7 @@ import {createPost} from "../../services/posts"
 
 export function CreatePost() {
 const token = localStorage.getItem("token");
+const userId = localStorage.getItem("userID");
 
     const [disabledPostButton, setDisabledPostButton] = useState(false);
     const [errorMsg, setErrorMsg] = useState(null)
@@ -16,7 +17,8 @@ const token = localStorage.getItem("token");
         setDisabledPostButton(true);
     
         const postBody = {
-            message: postContent
+            message: postContent,
+            userId: userId
         };
     
         try {
