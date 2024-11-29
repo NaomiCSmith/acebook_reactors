@@ -12,7 +12,7 @@ export function SignupPage() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await signup(email, password);
+      await signup(email, password, username);
       navigate("/login");
     } catch (err) {
       console.error(err);
