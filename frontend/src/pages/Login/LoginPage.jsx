@@ -17,6 +17,8 @@ export function LoginPage() {
       const userID = await getUserByEmail(token,email)
       localStorage.setItem("token", token);
       localStorage.setItem("userID", userID._id);
+      localStorage.setItem("email", email)
+      localStorage.setItem("password", password)
       navigate("/welcome");
     } catch (err) {
       console.error(err);

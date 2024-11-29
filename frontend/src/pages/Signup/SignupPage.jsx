@@ -6,6 +6,7 @@ import { signup } from "../../services/authentication";
 export function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
@@ -27,10 +28,21 @@ export function SignupPage() {
     setPassword(event.target.value);
   }
 
+  function handleUsernameChange(event) {
+    setUsername(event.target.value)
+  }
+
   return (
     <>
       <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username:</label>
+        <input
+          id="username"
+          type="text"
+          value={username}
+          onChange={handleUsernameChange}
+        />
         <label htmlFor="email">Email:</label>
         <input
           id="email"
