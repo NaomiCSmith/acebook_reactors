@@ -20,6 +20,8 @@ export function SignupPage() {
     }
   }
 
+  localStorage.setItem("username", username);
+
   function handleEmailChange(event) {
     setEmail(event.target.value);
   }

@@ -4,7 +4,7 @@ import CommentButton from "../components/CommentButton"
 import {deletePost} from "../services/posts"
 
 function Post(props) {
-  
+  const username = localStorage.getItem('username')
   const userID = localStorage.getItem('userID')
   const token = localStorage.getItem('token')
 
@@ -29,7 +29,7 @@ function Post(props) {
     {props.post.userId === userID && (
                 <button className="delete" onClick={handleDelete}>Delete</button>
             )}
-  <p className="author"><strong>Author: </strong>{props.post.userId}</p>
+  <p className="author"><strong>Author: </strong>{username}</p>
   </div>
   <article key={props.post._id}>{props.post.message}</article>
   <div className="like-comment-container">

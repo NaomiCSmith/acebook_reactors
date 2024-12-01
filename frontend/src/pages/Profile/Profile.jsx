@@ -6,12 +6,12 @@ import defaultAvatar from "../../assets/default-avatar.png"; // Import the avata
 export const Profile = () => {
   // Placeholder user data
   const userID = localStorage.getItem("userID");
-  const email = localStorage.getItem("email")
-  
+  const email = localStorage.getItem("email");
+  const username = localStorage.getItem("username");
 
   const user = {
-    username: "johndoe",
-    email: "johndoe@example.com",
+    username: username,
+    email: email,
     password: "*******", // Obscured password
     photo: "", // Leave blank for default avatar
   };
@@ -37,14 +37,13 @@ export const Profile = () => {
                 />
               </div>
               <div className="card-body">
-                <h2 className="card-title text-center mb-4">{user.name}</h2>
+                <h2 className="card-title text-center mb-4">{user.username}</h2>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">
                     <strong>Email:</strong> {user.email}
                   </li>
                   <li className="list-group-item">
                     <strong>Password:</strong> {user.password}
-                    <p>{userID}</p>
                   </li>
                 </ul>
                 <div className="text-center mt-4">
