@@ -5,13 +5,13 @@ const Comment = require("../models/comment");
 const User = require("../models/user")
 
 async function getAllPosts(req, res) {
+  try{
   const posts = await Post.find().sort({createdAt: -1});
   const token = generateToken(req.user_id);
   const postsWithCommentCountandAuthor = await Promise.all(
     posts.map(async (post) => {
         const commentCount = await Comment.countDocuments({ postId: post._id });
         const postAuthor = await User.findById(post.userId)
-        console.log(postAuthor, req.user_id)
         return {
             ...post._doc,
             commentCount: commentCount,
@@ -20,6 +20,10 @@ async function getAllPosts(req, res) {
     })
   );
   res.status(200).json({ posts: postsWithCommentCountandAuthor, token: token });
+} catch (error) {
+  console.error("Error fetching posts:", error);
+  res.status(500).json({ message: "Failed to fetch posts" });
+}
 }
 
 async function createPost(req, res) {
