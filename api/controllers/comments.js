@@ -48,11 +48,32 @@ const deleteAComment = async (req, res) => {
     }
 };
 
+const updateAComment = async (req, res) => {
+    try {
+        
+    const commentId = req.params.commentId;
+    const { message } = req.body;
+
+    const comment = await Comment.findById(commentId);
+    if (!comment) {
+        return res.status(404).json({ message: "Comment not found" });
+    }
+    comment.message = message;
+    await comment.save();
+
+    res.status(200).json({ message: "Comment updated successfully", comment });
+    } catch (error) {
+        console.error("Error updating comment:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+    };
+
 
 const CommentsController = {
     create: create,
     getAllComments: getAllComments,
     deleteAComment: deleteAComment,
+    updateAComment: updateAComment,
 };
 
 module.exports = CommentsController

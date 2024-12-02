@@ -102,3 +102,22 @@ export async function deletePost(postId) {
 
   return await response.json();
 }
+
+export const updatePost = async (token, postId, newPost) => {
+  const response = await fetch(`${BACKEND_URL}/posts/${postId}`, {
+  method: "PUT",
+  headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+  },
+  body: JSON.stringify({ message: newPost }),
+  });
+
+  if (!response.ok) {
+  const errorMessage = await response.json();
+  console.error("Error updating post:", errorMessage);
+  throw new Error("Failed to update the post.");
+  }
+
+  return response.json();
+};

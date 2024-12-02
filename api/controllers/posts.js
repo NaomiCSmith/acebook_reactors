@@ -96,6 +96,26 @@ async function deletePost(req, res) {
 }
 }
 
+const updateAPost = async (req, res) => {
+  try {
+      
+  const postId = req.params.postId;
+  const { message } = req.body;
+
+  const post = await Post.findById(postId);
+  if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+  }
+  post.message = message;
+  await post.save();
+
+  res.status(200).json({ message: "Post updated successfully", post });
+  } catch (error) {
+      console.error("Error updating post:", error);
+      res.status(500).json({ message: "Server error" });
+  }
+  };
+
 
 const PostsController = {
   getAllPosts: getAllPosts,
@@ -103,6 +123,7 @@ const PostsController = {
   likePost: likePost,
   unLikePost: unLikePost,
   deletePost: deletePost,
+  updateAPost: updateAPost,
 };
 
 module.exports = PostsController;
