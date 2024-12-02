@@ -24,6 +24,7 @@ function Post(props) {
     }
 };
 
+
 const handleEdit = () =>{
   setDisabledbutton(false)
 }
@@ -40,12 +41,10 @@ const handleAmend = async () =>{
   
 }
 
-
-
   return (
   <div className="post">
   <div className="author-delete-container">
-    <p className="author"><strong>Author: </strong>{props.post.userId}</p>
+  <p className="author"><strong>Author: </strong>{props.post.postAuthor.username}</p>
     {props.post.userId === userID && (
       <>
         <p className="text-click" onClick={handleDelete}>Delete</p>

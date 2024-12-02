@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { login } from "../../services/authentication";
 import { getUserByEmail } from "../../services/users";
+// import { locals } from "../../../../api/app";
 
 
 export function LoginPage() {
@@ -17,8 +17,8 @@ export function LoginPage() {
       const userID = await getUserByEmail(token,email)
       localStorage.setItem("token", token);
       localStorage.setItem("userID", userID._id);
-      localStorage.setItem("email", email)
-      localStorage.setItem("password", password)
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
       navigate("/welcome");
     } catch (err) {
       console.error(err);
@@ -55,5 +55,5 @@ export function LoginPage() {
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
     </>
-  );
+  )
 }

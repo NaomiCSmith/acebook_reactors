@@ -52,6 +52,23 @@ export function SignupPage() {
       console.error("Error during signup:", error);
       setErrorMessage("An unexpected error occurred. Please try again.");
     }
+// <<<<<<< post_username
+//   }
+
+//   localStorage.setItem("username", username);
+
+//   function handleEmailChange(event) {
+//     setEmail(event.target.value);
+//   }
+
+//   function handlePasswordChange(event) {
+//     setPassword(event.target.value);
+//   }
+
+//   function handleUsernameChange(event) {
+//     setUsername(event.target.value)
+//   }
+// =======
   };
   
 
