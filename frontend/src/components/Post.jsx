@@ -21,15 +21,13 @@ function Post(props) {
     }
 };
 
-
-
   return (
   <div className="post">
   <div className="author-delete-container">
     {props.post.userId === userID && (
                 <button className="delete" onClick={handleDelete}>Delete</button>
             )}
-  <p className="author"><strong>Author: </strong>{username}</p>
+  <p className="author"><strong>Author: </strong>{props.post.postAuthor.username}</p>
   </div>
   <article key={props.post._id}>{props.post.message}</article>
   <div className="like-comment-container">
