@@ -41,11 +41,12 @@ const LikeButton = ({post, userID}) => {
 
     return (
         <div>
-            <span>{likes} {likes === 1? 'like' : 'likes'}</span> 
+            <img src={isLiked ? './liked.png' : './unliked.png'} onClick={changeLike} alt="thumbs up button"/>
+            <span> {likes} {likes === 1? 'like' : 'likes'}</span> 
             <br></br>
-            <button className={`LikeButton ${isLiked ? "isLiked" : ""}`} onClick={changeLike}>
+            {/* <button className={`LikeButton ${isLiked ? "isLiked" : ""}`} onClick={changeLike}>
                 {isLiked ? 'Liked' : 'Like'}
-            </button>
+            </button> */}
             {error && <p>{error}</p>}
         </div>
     );
