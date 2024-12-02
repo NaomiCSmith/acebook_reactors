@@ -1,0 +1,24 @@
+.edit-delete-container{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    border-top: 1px solid grey;
+    margin-top: 5px;
+}
+
+.text-click:hover{
+    color: blue;
+    cursor: pointer;
+}
+
+.comment-data{
+    width:80%;
+    background-color: white;
+    border: none;
+    text-align: center;
+}
+
+.comment-author{
+    border-bottom: 1px solid grey;
+    margin-bottom: 5px;
+}

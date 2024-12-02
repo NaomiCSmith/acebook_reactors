@@ -1,5 +1,13 @@
-import {deleteComment} from "../services/comments";
+import {deleteComment, updateComment} from "../services/comments";
+import "./Comment.css"
+import {useState} from "react"
+
+
 function Comment(props) {
+    const [currentComment, setCurrentComment] = useState(props.comment.message)
+    const [disabledButton, setDisabledbutton] = useState(true)
+    const token = localStorage.getItem('token')
+
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this comment?")) {
             try {
@@ -12,15 +20,41 @@ function Comment(props) {
             }
         }
         };
+
+    const handleEdit = () =>{
+        setDisabledbutton(false)
+    }
+
+    const handleAmend = async () =>{
+        try {
+            await updateComment(token, props.comment._id, currentComment);
+            alert("Comment updated successfully!");
+            setDisabledbutton(true)
+        } catch (error) {
+            console.error("Error updating comment:", error);
+            alert("Failed to update the comment.");
+        }
+        
+    }
     
     return (
     <div className="comment">
-    <article key={props.comment._id}>{props.comment.message}</article>
-    <p><strong>Author: </strong>{props.comment.userId}</p>
+    <p className="comment-author"><strong>Author: </strong>{props.comment.userId}</p>
+    <textarea
+    key={props.comment._id}
+    className="comment-data"
+    value={currentComment}
+    disabled={disabledButton}
+    onChange={(event) => setCurrentComment(event.target.value)}>
+    </textarea>
     {props.comment.userId === props.userID && (
-        <button className="delete" onClick={handleDelete}>Delete</button>
-    )}
-    <br />
+        <div className="edit-delete-container">
+            <p className="text-click" onClick={handleDelete}>Delete</p>
+            <p className="text-click" onClick={handleEdit}>{disabledButton ? 'Edit' : ''}</p>
+            {!disabledButton && (<p className="text-click" onClick={handleAmend}>Save</p>)}
+        </div>
+        )}
+    
     </div>
 )
 }

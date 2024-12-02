@@ -1,10 +1,13 @@
 import LikeButton from "../components/LikeButton"
 import "./Post.css"
 import CommentButton from "../components/CommentButton"
-import {deletePost} from "../services/posts"
+import {deletePost, updatePost} from "../services/posts"
+import {useState} from "react"
+
 
 function Post(props) {
-  const username = localStorage.getItem('username')
+  const [currentPost, setCurrentPost] = useState(props.post.message)
+  const [disabledButton, setDisabledbutton] = useState(true)
   const userID = localStorage.getItem('userID')
   const token = localStorage.getItem('token')
 
@@ -21,15 +24,45 @@ function Post(props) {
     }
 };
 
+
+const handleEdit = () =>{
+  setDisabledbutton(false)
+}
+
+const handleAmend = async () =>{
+  try {
+      await updatePost(token, props.post._id, currentPost);
+      alert("Post updated successfully!");
+      setDisabledbutton(true)
+  } catch (error) {
+      console.error("Error updating post:", error);
+      alert("Failed to update the post.");
+  }
+  
+}
+
   return (
   <div className="post">
   <div className="author-delete-container">
-    {props.post.userId === userID && (
-                <button className="delete" onClick={handleDelete}>Delete</button>
-            )}
   <p className="author"><strong>Author: </strong>{props.post.postAuthor.username}</p>
+    {props.post.userId === userID && (
+      <>
+        <p className="text-click" onClick={handleDelete}>Delete</p>
+        <p className="text-click" onClick={handleEdit}>{disabledButton ? 'Edit' : ''}</p>
+        {!disabledButton && (<p className="text-click" onClick={handleAmend}>Save</p>)}
+      </>
+            )}
+
   </div>
-  <article key={props.post._id}>{props.post.message}</article>
+
+<textarea
+    key={props.post._id}
+    className="post-data"
+    value={currentPost}
+    disabled={disabledButton}
+    onChange={(event) => setCurrentPost(event.target.value)}>
+    </textarea>
+
   <div className="like-comment-container">
   <LikeButton className="like"post={props.post} userID={userID}/>
   <CommentButton className="comment" post={props.post} userID={userID} token={token}/>

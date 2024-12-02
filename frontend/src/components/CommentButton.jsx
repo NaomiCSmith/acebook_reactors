@@ -74,8 +74,8 @@ const CommentButton = ({ post, userID, token }) => {
                 alt="comment speech bubble"
                 onClick={seeComments}
             />
-            {post.commentCount} {post.commentCount === 1 ? "Comment" : "Comments"}
-
+            {/* {post.commentCount === 1 ? " Comment" : " Comments"} {post.commentCount} */}
+            {post.commentCount}
             {viewComments &&
                 <div>
                     {commentsData.length > 0 ? (
