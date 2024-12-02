@@ -37,3 +37,52 @@ button {
     padding: 10px;
   }
 }
+
+
+/* Profile Photo Container */
+.profile-photo-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Profile Photo */
+.profile-photo-wrapper .profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+/* Overlay for Hover Effect */
+.profile-photo-wrapper .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  font-size: 16px;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+}
+
+/* Show Overlay on Hover */
+.profile-photo-wrapper.hover .overlay {
+  opacity: 1;
+}
+
+/* Zoom Effect on Hover */
+.profile-photo-wrapper:hover .profile-photo {
+  transform: scale(1.1);
+}
