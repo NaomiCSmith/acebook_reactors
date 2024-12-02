@@ -56,4 +56,23 @@ export const deleteComment = async (token, commentId) => {
     return response.json();
 };
 
+export const updateComment = async (token, commentId, newComment) => {
+    const response = await fetch(`${BACKEND_URL}/comments/${commentId}`, {
+    method: "PUT",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify({ message: newComment }),
+    });
+
+    if (!response.ok) {
+    const errorMessage = await response.json();
+    console.error("Error updating comment:", errorMessage);
+    throw new Error("Failed to update the comment.");
+    }
+
+    return response.json();
+};
+
 
