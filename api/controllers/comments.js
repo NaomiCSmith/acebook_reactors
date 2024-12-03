@@ -1,8 +1,9 @@
 const Comment = require("../models/comment")
 const { generateToken } = require("../lib/token");
 const mongoose = require('mongoose');
+const User = require("../models/user")
 
-function create(req, res) {
+async function create(req, res) {
 const postId = req.body.postId;
 const userId =  req.body.userId;
 const message = req.body.message;
@@ -23,15 +24,23 @@ async function getAllComments(req, res) {
     try{
     const postId = req.params.postId
     const userId =  req.query.user_id;
-    
     const comments = await Comment.find({postId: postId.toString()});
+    
+    // find all authors who have posted a comment
+    const authorIDs = comments.map(item => item.userId);
+    const authors = await Promise.all(authorIDs.map(item => User.findById(item)));
+
+    // correct order of authors to the order of comments:
+    const orderedAuthorIDs = comments.map(comment => comment.userId);
+    const orderedAuthors = orderedAuthorIDs.map(userId => authors.find(user => user._id.toString() === userId))
+    
     const token = generateToken(userId);
-    res.status(200).json({ comments: comments, token: token });
-    } catch (error) {
+    res.status(200).json({ comments: comments, authors: orderedAuthors, token: token });
+} catch (error) {
     console.error("Error fetching comments:", error);
     res.status(500).json({ message: "Failed to fetch comments" });
-}
-}
+};
+};
 
 const deleteAComment = async (req, res) => {
     const commentId = req.params.commentId;
@@ -50,10 +59,8 @@ const deleteAComment = async (req, res) => {
 
 const updateAComment = async (req, res) => {
     try {
-        
     const commentId = req.params.commentId;
     const { message } = req.body;
-
     const comment = await Comment.findById(commentId);
     if (!comment) {
         return res.status(404).json({ message: "Comment not found" });

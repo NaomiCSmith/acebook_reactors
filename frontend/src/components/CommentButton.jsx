@@ -21,9 +21,8 @@ const CommentButton = ({ post, userID, token }) => {
         if (!viewComments) {
             try {
                 const response = await getComments(token, post._id, userID);
-                
                 if (response) {
-                    setCommentsData(response.comments);
+                    setCommentsData(response.comments)
                     setError(null); 
                 }
             } catch (error) {
@@ -81,7 +80,7 @@ const CommentButton = ({ post, userID, token }) => {
                     {commentsData.length > 0 ? (
                         commentsData.map((comment) => (
                             <div className="comment-container" key={comment._id}>
-                                <Comment comment={comment} userID={userID} token={token} onCommentDeleted={handleCommentDeleted}/>
+                                <Comment comment={comment} author={""} userID={userID} token={token} onCommentDeleted={handleCommentDeleted}/>
                             </div>
                         ))
                     ) : (

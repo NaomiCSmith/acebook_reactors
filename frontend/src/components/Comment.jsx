@@ -7,6 +7,8 @@ function Comment(props) {
     const [currentComment, setCurrentComment] = useState(props.comment.message)
     const [disabledButton, setDisabledbutton] = useState(true)
     const token = localStorage.getItem('token')
+    console.log(props.author)
+    console.log(props.comment.message)
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this comment?")) {
@@ -39,7 +41,7 @@ function Comment(props) {
     
     return (
     <div className="comment">
-    <p className="comment-author"><strong>Author: </strong>{props.comment.userId}</p>
+    <p className="comment-author"><strong>Author: </strong>{}</p>
     <textarea
     key={props.comment._id}
     className="comment-data"
