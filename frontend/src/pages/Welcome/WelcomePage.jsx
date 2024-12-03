@@ -13,13 +13,13 @@ export function WelcomePage() {
             <Header />
         </div>
         <div className="welcome">
-            <h1>Welcome, stranger!</h1>
+            <h1>Welcome, developer!</h1>
             <h2>What would you like to do?</h2>
         </div>
         <div className="button-container">
-            <a href="/profile"><button className="profile-button">View Your Profile</button></a>
-            <a href="/posts"><button className="posts-button">View All Posts</button></a>
-            <a href="/createpost"><button className="create-post-button">Create a Post</button></a>
+            <Link to="/profile"><button className="profile-button">View Your Profile</button></Link>
+            <Link to="/posts"><button className="posts-button">View All Posts</button></Link>
+            <Link to="/createpost"><button className="create-post-button">Create a Post</button></Link>
         </div>
         </>
     );
