@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {createPost} from "../../services/posts"
+import Header from "../Header/Header";
 
 export function CreatePost() {
 const token = localStorage.getItem("token");
@@ -47,6 +48,7 @@ const userId = localStorage.getItem("userID");
 
     return(
         <>
+        <Header/>
         {createdPost ? <h2>Post successfully created!</h2> : null} 
         {returnedPost ? <Link to='/posts'><h3>Return to Posts</h3></Link> : null}
         <h1>Submit a post:</h1>

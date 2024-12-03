@@ -53,4 +53,24 @@ if (!response.ok) {
     return user;
 } 
 
+export async function addFriend(token, userId, loggedInUser) {
+    const requestOptions = {
+        method: "POST",
+        headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+    },
+        body: JSON.stringify({ userId: loggedInUser })
+    };
+
+    const response = await fetch(`${BACKEND_URL}/users/addFriend/${userId}`, requestOptions);
+    
+    if (!response.ok) {
+        throw new Error(`Failed to add friend: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+}
+
 

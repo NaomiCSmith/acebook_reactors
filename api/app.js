@@ -26,6 +26,7 @@ app.use("/createpost", postsRouter);
 app.use("/like:id", postsRouter)
 app.use("/createcomment", commentsRouter)
 app.use("/comments", commentsRouter)
+app.use("/users/addFriend", usersRouter);
 
 
 // 404 Handler

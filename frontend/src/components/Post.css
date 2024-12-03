@@ -39,3 +39,12 @@
     border: none;
     text-align: center;
 }
+
+.author{
+    cursor: pointer;
+}
+
+.author:hover{
+    background-color: yellow;
+    border-radius: 8px;
+}
