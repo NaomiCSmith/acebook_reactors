@@ -36,4 +36,21 @@ export async function getUserByUsername(token, username) {
         return user;
     } 
 
+export async function getUserProfile(token, userId) {
+    const requestOptions = {
+        method: "GET",
+        headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+        },
+    };
+        const response = await fetch(`${BACKEND_URL}/users/${userId}`, requestOptions);
+    
+if (!response.ok) {
+    throw new Error(`User not found or error: ${response.statusText}`);
+}
+    const user = await response.json();
+    return user;
+} 
+
 

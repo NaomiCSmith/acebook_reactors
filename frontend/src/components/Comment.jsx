@@ -1,12 +1,13 @@
 import {deleteComment, updateComment} from "../services/comments";
 import "./Comment.css"
 import {useState} from "react"
-
+import { useNavigate } from "react-router-dom";
 
 function Comment(props) {
     const [currentComment, setCurrentComment] = useState(props.comment.message)
     const [disabledButton, setDisabledbutton] = useState(true)
     const token = localStorage.getItem('token')
+    const navigate = useNavigate();
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this comment?")) {
@@ -36,10 +37,14 @@ function Comment(props) {
         }
         
     }
+
+    const handleAuthorClick = () => {
+        navigate(`/userprofile/${props.comment.userId}`);
+    };
     
     return (
     <div className="comment">
-    <p className="comment-author"><strong>Author: </strong>{props.comment.userId}</p>
+    <p onClick={handleAuthorClick} className="comment-author"><strong>Author: </strong>{props.comment.userId}</p>
     <textarea
     key={props.comment._id}
     className="comment-data"
