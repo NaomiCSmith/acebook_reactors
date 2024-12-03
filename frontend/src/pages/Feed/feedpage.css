@@ -27,4 +27,17 @@
   .action-buttons {
     margin-bottom: 20px;
   }
+
+  .create-post{
+    background-color: #0ef968;
+    border: 1px solid black;
+    font-weight: bold;
+  }
+
+  .create-post:hover{
+    background-color: yellow;
+    color: black;
+    border: 1px solid black;
+    font-weight: bold;
+  }
   

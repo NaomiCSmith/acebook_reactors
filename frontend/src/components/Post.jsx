@@ -3,6 +3,7 @@ import "./Post.css"
 import CommentButton from "../components/CommentButton"
 import {deletePost, updatePost} from "../services/posts"
 import {useState} from "react"
+import { useNavigate } from "react-router-dom";
 
 
 function Post(props) {
@@ -10,6 +11,8 @@ function Post(props) {
   const [disabledButton, setDisabledbutton] = useState(true)
   const userID = localStorage.getItem('userID')
   const token = localStorage.getItem('token')
+  const postAuthor = props.post.postAuthor.username
+  const navigate = useNavigate();
 
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this post?")) {
@@ -41,10 +44,15 @@ const handleAmend = async () =>{
   
 }
 
+const handleAuthorClick = () => {
+  navigate(`/userprofile/${props.post.userId}`);
+};
+
+
   return (
   <div className="post">
   <div className="author-delete-container">
-  <p className="author"><strong>Author: </strong>{props.post.postAuthor.username}</p>
+  <p onClick={handleAuthorClick} className="author"><strong>Author: </strong>{postAuthor}</p>
     {props.post.userId === userID && (
       <>
         <p className="text-click" onClick={handleDelete}>Delete</p>

@@ -175,6 +175,54 @@ function uploadProfilePhoto(req, res) {
     }
   });
 }
+
+const getUserProfile = async (req, res) => {
+  try {
+    const userId = req.params.userId
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const addFriend = async (req, res) => {
+  const userId = req.params.userId;
+  const currentUserId = req.body.userId;
+
+  if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(currentUserId)) {
+    return res.status(400).json({ message: "Invalid user ID format" });
+  }
+
+  try {
+    const currentUser = await User.findById(currentUserId);
+    const userToAdd = await User.findById(userId);
+
+    if (!currentUser || !userToAdd) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (currentUser.friends.includes(userId)) {
+      return res.status(400).json({ message: "User is already a friend" });
+    }
+
+    currentUser.friends.push(userId);
+    userToAdd.friends.push(currentUserId);
+
+    await currentUser.save();
+    await userToAdd.save();
+
+    res.status(200).json({ message: "Friend added successfully" });
+  } catch (error) {
+    console.error("Error adding friend:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 const UsersController = {
   create,
   findByEmail,
@@ -182,5 +230,7 @@ const UsersController = {
   findById,
   update,
   uploadProfilePhoto,
+  getUserProfile,
+  addFriend,
 };
 module.exports = UsersController;

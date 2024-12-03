@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {createPost} from "../../services/posts"
+import Header from "../Header/Header";
+import "./CreatePost.css"
 
 export function CreatePost() {
 const token = localStorage.getItem("token");
@@ -47,8 +49,9 @@ const userId = localStorage.getItem("userID");
 
     return(
         <>
+        <Header/>
         {createdPost ? <h2>Post successfully created!</h2> : null} 
-        {returnedPost ? <Link to='/posts'><h3>Return to Posts</h3></Link> : null}
+        {returnedPost ? <Link to='/posts'><h3 className="return">Return to Posts</h3></Link> : null}
         <h1>Submit a post:</h1>
         <form onSubmit={handleSubmit}>
             <label htmlFor='post-body'>
@@ -59,7 +62,7 @@ const userId = localStorage.getItem("userID");
             </textarea>
             </label>
             <br />
-            <button disabled={disabledPostButton} type='submit'>Submit Post</button>
+            <button disabled={disabledPostButton} type='submit' className="submit-post">Submit Post</button>
         </form>
         </>
     )

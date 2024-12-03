@@ -11,7 +11,6 @@ async function getAllPosts(req, res) {
     posts.map(async (post) => {
         const commentCount = await Comment.countDocuments({ postId: post._id });
         const postAuthor = await User.findById(post.userId)
-        console.log(postAuthor, req.user_id)
         return {
             ...post._doc,
             commentCount: commentCount,

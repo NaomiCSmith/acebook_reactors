@@ -1,0 +1,26 @@
+.add-friend{
+    background-color: #0ef968;
+    font-weight: bold;
+    padding:8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.add-friend:hover{
+    background-color: yellow;
+    color: black;
+}
+
+.friend{
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding:8px;
+    border-radius: 8px;
+}
+
+.user-photo{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}

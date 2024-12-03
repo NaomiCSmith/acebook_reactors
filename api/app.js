@@ -24,11 +24,10 @@ app.use("/users", usersRouter);
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/createpost", postsRouter);
-app.use("/like:id", postsRouter);
-app.use("/createcomment", commentsRouter);
-app.use("/comments", commentsRouter);
-
-// Serve static files from the 'uploads' folder
+app.use("/like:id", postsRouter)
+app.use("/createcomment", commentsRouter)
+app.use("/comments", commentsRouter)
+app.use("/users/addFriend", usersRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // 404 Handler

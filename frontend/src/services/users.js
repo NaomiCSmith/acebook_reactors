@@ -36,4 +36,41 @@ export async function getUserByUsername(token, username) {
         return user;
     } 
 
+export async function getUserProfile(token, userId) {
+    const requestOptions = {
+        method: "GET",
+        headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+        },
+    };
+        const response = await fetch(`${BACKEND_URL}/users/${userId}`, requestOptions);
+    
+if (!response.ok) {
+    throw new Error(`User not found or error: ${response.statusText}`);
+}
+    const user = await response.json();
+    return user;
+} 
+
+export async function addFriend(token, userId, loggedInUser) {
+    const requestOptions = {
+        method: "POST",
+        headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+    },
+        body: JSON.stringify({ userId: loggedInUser })
+    };
+
+    const response = await fetch(`${BACKEND_URL}/users/addFriend/${userId}`, requestOptions);
+    
+    if (!response.ok) {
+        throw new Error(`Failed to add friend: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+}
+
 
