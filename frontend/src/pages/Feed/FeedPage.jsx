@@ -45,7 +45,7 @@ const handlePostDeleted = (postId) => {
         <h2 className="text-center">Posts</h2>
         <div className="action-buttons text-center">
           <Link to="/createpost">
-            <button className="btn btn-primary">Write post</button>
+            <button className="btn create-post">Write post</button>
           </Link>
         </div>
         <br />

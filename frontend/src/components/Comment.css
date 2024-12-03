@@ -23,3 +23,9 @@
     border-bottom: 1px solid grey;
     margin-bottom: 5px;
 }
+
+.comment-author:hover{
+    cursor: pointer;
+    background-color: yellow;
+    border-radius: 8px;
+}

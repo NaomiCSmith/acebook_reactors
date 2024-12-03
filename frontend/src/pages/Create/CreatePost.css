@@ -1,0 +1,22 @@
+.submit-post{
+    background-color: #0ef968;
+    border: 1px solid black;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.submit-post:hover{
+    background-color: yellow;
+    color: black;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+.return{
+    background-color: #0ef968;
+    color: black;
+}
+
+.return:hover{
+    background-color: yellow;
+}
