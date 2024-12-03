@@ -1,12 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path"); // Add this line to import the `path` module
 
 const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const tokenChecker = require("./middleware/tokenChecker");
-const commentsRouter = require("./routes/comments")
+const commentsRouter = require("./routes/comments");
 
 const app = express();
 
@@ -27,7 +28,7 @@ app.use("/like:id", postsRouter)
 app.use("/createcomment", commentsRouter)
 app.use("/comments", commentsRouter)
 app.use("/users/addFriend", usersRouter);
-
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // 404 Handler
 app.use((_req, res) => {

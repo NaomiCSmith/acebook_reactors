@@ -95,27 +95,59 @@ async function findById(req, res) {
 /**
 * Update user information.
 */
+// async function update(req, res) {
+//   const userId = req.params.id;
+//   const { username, email, password } = req.body;
+//   if (!mongoose.Types.ObjectId.isValid(userId)) {
+//     return res.status(400).json({ message: "Invalid User ID format" });
+//   }
+//   try {
+//     const updatedUser = await User.findByIdAndUpdate(
+//       userId,
+//       { username, email, password },
+//       { new: true }
+//     );
+//     if (!updatedUser) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+//     res.status(200).json({ message: "User updated successfully", user: updatedUser });
+//   } catch (err) {
+//     console.error("Error updating user:", err);
+//     res.status(500).json({ message: "Failed to update user" });
+//   }
+// }
+
 async function update(req, res) {
   const userId = req.params.id;
-  const { username, email, password } = req.body;
+
+  console.log("Updating user with ID:", userId); // Debug log
+
+  // Validate userId format
   if (!mongoose.Types.ObjectId.isValid(userId)) {
+    console.error("Invalid User ID:", userId); // Debug log
     return res.status(400).json({ message: "Invalid User ID format" });
   }
+
+  const { username, email, password } = req.body;
+
   try {
-    const updatedUser = await User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
       userId,
       { username, email, password },
       { new: true }
     );
-    if (!updatedUser) {
+    if (!user) {
+      console.error("User Not Found for ID:", userId); // Debug log
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json({ message: "User updated successfully", user: updatedUser });
+    res.status(200).json(user);
   } catch (err) {
     console.error("Error updating user:", err);
     res.status(500).json({ message: "Failed to update user" });
   }
 }
+
+
 /**
 * Upload or update profile photo.
 */

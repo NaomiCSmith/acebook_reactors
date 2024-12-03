@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import "./profile.css";
 import defaultAvatar from "../../assets/default-avatar.png";
 
+
 export const Profile = () => {
   const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -11,7 +12,9 @@ export const Profile = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("******");
-  const [photo, setPhoto] = useState("");
+  // const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState(""); // Initialize with default avatar
+
 
   const userID = localStorage.getItem("userID");
 
@@ -93,8 +96,11 @@ export const Profile = () => {
     return <p>Loading...</p>; // Loading state
   }
 
+  // const profilePhoto = photo ? `http://localhost:3000${user.photo}` : "/images/default-avatar.png";
   const profilePhoto = photo ? `http://localhost:3000${photo}` : defaultAvatar;
+  console.log("Photo value:", photo);
 
+  
   return (
     <>
       <Header />
@@ -126,7 +132,6 @@ export const Profile = () => {
                 </div>
               </div>
               <div className="card-body">
-
                 {isEditing ? (
                   <>
                     <div className="mb-3">
@@ -209,4 +214,3 @@ export const Profile = () => {
     </>
   );
 };
-
