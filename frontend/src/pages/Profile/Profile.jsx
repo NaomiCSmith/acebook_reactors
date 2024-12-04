@@ -2,22 +2,18 @@ import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import "./profile.css";
 import defaultAvatar from "../../assets/default-avatar.png";
-import { getUserFriends } from "../../services/users";
-
+import { getUserFriends, uploadProfilePhoto } from "../../services/users";
 
 export const Profile = () => {
   const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [hover, setHover] = useState(false);
-
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("******");
-  // const [photo, setPhoto] = useState("");
-  const [photo, setPhoto] = useState(""); // Initialize with default avatar
-  const token = localStorage.getItem('token')
-  const [friends, setFriends] = useState([])
-  
+  const [photo, setPhoto] = useState("");
+  const token = localStorage.getItem("token");
+  const [friends, setFriends] = useState([]);
 
   const userID = localStorage.getItem("userID");
 
@@ -29,8 +25,9 @@ export const Profile = () => {
         setUser(data);
         setUsername(data.username);
         setEmail(data.email);
-        setPassword(data.password); // Store the actual password when fetching user data
-        setPhoto(data.photo);
+        setPassword("******"); // Mask password for display
+        setPhoto(data.photo || defaultAvatar); // Set photo or default avatar
+
         const userFriends = await getUserFriends(token, userID);
         setFriends(userFriends);
       } catch (error) {
@@ -42,25 +39,21 @@ export const Profile = () => {
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
+    if (!file) return;
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("userId", userID);
-    formData.append("username", username);
-    formData.append("email", email);
-    formData.append("password", password);
 
     try {
-      const response = await fetch("http://localhost:3000/users/profilePhoto", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setUser(data.user); // Update the user object
-        setPhoto(data.user.photo); // Update the photo
+      const response = await uploadProfilePhoto(file, userID)
+
+      if (response && response.user) {
+        setPhoto(response.user.photo);
         alert("Photo updated successfully!");
       } else {
-        console.error("Error response from server:", data);
+        console.error("Error response from server:", response);
+        alert("Failed to upload photo.");
       }
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -85,8 +78,6 @@ export const Profile = () => {
       if (response.ok) {
         setIsEditing(false);
         setUser(data);
-        localStorage.setItem("username", username);
-        localStorage.setItem("email", email);
         alert("Profile updated successfully!");
       } else {
         console.error("Error updating profile:", data);
@@ -101,11 +92,6 @@ export const Profile = () => {
     return <p>Loading...</p>; // Loading state
   }
 
-  // const profilePhoto = photo ? `http://localhost:3000${user.photo}` : "/images/default-avatar.png";
-  const profilePhoto = photo ? `http://localhost:3000${photo}` : defaultAvatar;
-  console.log("Photo value:", photo);
-
-  
   return (
     <>
       <Header />
@@ -120,7 +106,7 @@ export const Profile = () => {
                   onMouseLeave={() => setHover(false)}
                 >
                   <img
-                    src={profilePhoto}
+                    src={photo || defaultAvatar}
                     alt="Profile"
                     className="profile-photo"
                   />
@@ -169,17 +155,14 @@ export const Profile = () => {
                       </label>
                       <input
                         id="password"
-                        type="text" // Set input type to text for viewing the password in Edit mode
+                        type="text"
                         className="form-control"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
                     <div className="text-center mt-4">
-                      <button
-                        className="btn btn-success me-2"
-                        onClick={handleSave}
-                      >
+                      <button className="btn btn-success me-2" onClick={handleSave}>
                         Save
                       </button>
                       <button
@@ -198,31 +181,28 @@ export const Profile = () => {
                         <strong>Email:</strong> {user.email}
                       </li>
                       <li className="list-group-item">
-                        <strong>Password:</strong> ****** {/* Mask password */}
+                        <strong>Password:</strong> ******
                       </li>
                     </ul>
                     <p><strong>Followers</strong></p>
                     {friends.length > 0 ? (
-            <ul>
-            {friends.map((friend) => (
-                <li key={friend._id}>
-                <img
-                src={friend.photo || defaultAvatar}
-                alt={`${friend.username}'s avatar`}
-                className="friend-avatar"
-                />
-            <span>{friend.username}</span>
-            </li>
-            ))}
-        </ul>
-        ) : (
-        <p>No followers yet.</p>
-        )}
+                      <ul>
+                        {friends.map((friend) => (
+                          <li key={friend._id}>
+                            <img
+                              src={friend.photo || defaultAvatar}
+                              alt={`${friend.username}'s avatar`}
+                              className="friend-avatar"
+                            />
+                            <span>{friend.username}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>No followers yet.</p>
+                    )}
                     <div className="text-center mt-4">
-                      <button
-                        className="btn btn-lg edit-button"
-                        onClick={() => setIsEditing(true)}
-                      >
+                      <button className="btn btn-lg edit-button" onClick={() => setIsEditing(true)}>
                         Edit Profile
                       </button>
                     </div>

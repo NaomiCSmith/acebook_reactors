@@ -1,16 +1,9 @@
 const User = require("../models/user");
 const multer = require("multer");
 const mongoose = require("mongoose");
-// Configure Multer for saving files locally
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Save files to the 'uploads/' directory
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Unique file names
-  },
-});
-const upload = multer({ storage }); // Multer middleware
+const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
+
 /**
 * Create a new user.
 */
@@ -147,34 +140,42 @@ async function update(req, res) {
   }
 }
 
+const uploadProfilePhoto = async (req, res) => {
+  const { userId } = req.body;
 
-/**
-* Upload or update profile photo.
-*/
-function uploadProfilePhoto(req, res) {
-  upload.single("file")(req, res, async (err) => {
-    if (err) {
-      console.error("Multer error:", err);
-      return res.status(500).json({ message: "Failed to upload image" });
+  if (!req.file) {
+    return res.status(400).json({ message: "No file uploaded" });
+  }
+
+  const filePath = req.file.path; 
+
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      folder: "profile_photos", 
+    });
+
+    fs.unlinkSync(filePath);
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { photo: result.secure_url },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-    const { userId, username, email, password } = req.body;
-    const filePath = `/uploads/${req.file.filename}`;
-    try {
-      const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { username, email, password, photo: filePath },
-        { new: true }
-      );
-      if (!updatedUser) {
-        return res.status(404).json({ message: "User not found" });
-      }
-      res.status(200).json({ message: "Profile updated", user: updatedUser });
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      res.status(500).json({ message: "Failed to update profile" });
+
+    res.json({ message: "Photo updated successfully!", user });
+  } catch (error) {
+    console.error("Error uploading profile photo:", error);
+    
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
     }
-  });
-}
+    res.status(500).json({ error: "Failed to update photo." });
+  }
+};
 
 const getUserProfile = async (req, res) => {
   try {

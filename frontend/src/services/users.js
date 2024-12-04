@@ -93,3 +93,20 @@ export async function getUserFriends(token, userId) {
     const userData = await response.json();
     return userData.friends;
     }
+
+export const uploadProfilePhoto = async (file, userId) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('userId', userId);
+    
+    const response = await fetch('http://localhost:3000/users/profilePhoto', {
+        method: 'POST',
+        body: formData,
+    });
+    
+    if (!response.ok) {
+        throw new Error('Failed to upload photo');
+    }
+    
+    return response.json(); 
+    };
