@@ -34,14 +34,12 @@ export const UserProfile = () => {
     };
 
     fetchUser();
-    }, [token,userId, loggedInUser]);
+    }, [token,userId, loggedInUser, friends]);
 
 
     const handleAddFriend = async () => {
         try {
-            const addedFriend = await addFriend(token, userId, loggedInUser);
-            
-            setFriends(prevFriends => [...prevFriends, addedFriend.user]);
+            await addFriend(token, userId, loggedInUser);
             setIsFriend(true);
         } catch (error) {
             console.error("Error adding follower:", error);

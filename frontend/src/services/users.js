@@ -110,3 +110,23 @@ export const uploadProfilePhoto = async (file, userId) => {
     
     return response.json(); 
     };
+
+export const signupUser = async (formData) => {
+    try {
+        const response = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        body: formData,
+        });
+    
+        const data = await response.json();
+        if (response.ok) {
+        return data; 
+        } else {
+        throw new Error(data.message || 'Signup failed');
+        }
+    } catch (error) {
+        console.error('Error during signup:', error);
+        throw error;
+    }
+    };
+    

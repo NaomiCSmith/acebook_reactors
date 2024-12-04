@@ -22,6 +22,7 @@ export const Profile = () => {
       try {
         const response = await fetch(`http://localhost:3000/users/findById/${userID}`);
         const data = await response.json();
+        
         setUser(data);
         setUsername(data.username);
         setEmail(data.email);
