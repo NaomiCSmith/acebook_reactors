@@ -12,13 +12,14 @@
 }
 
 .comment-data{
-    width:80%;
+    width:90%;
     background-color: white;
     border: none;
-    text-align: center;
+    text-align: left;
 }
 
 .comment-author{
     border-bottom: 1px solid grey;
     margin-bottom: 5px;
+    left: 0px;
 }

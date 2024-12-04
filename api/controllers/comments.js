@@ -4,21 +4,23 @@ const mongoose = require('mongoose');
 const User = require("../models/user")
 
 async function create(req, res) {
-const postId = req.body.postId;
-const userId =  req.body.userId;
-const message = req.body.message;
+    const postId = req.body.postId;
+    const userId =  req.body.userId;
+    const message = req.body.message;
+    const emptyAuthor = {username: ""}
+    // console.log(req.body)
 
-const comment = new Comment({ postId, userId, message });
-comment
-    .save()
-    .then((comment) => {
-        res.status(201).json({ message: "OK" });
-    })
-    .catch((err) => {
-        console.error(err);
-        res.status(400).json({ message: "Something went wrong" });
-    });
-}
+    const comment = new Comment({ postId, userId, message, emptyAuthor });
+    comment
+        .save()
+        .then((comment) => {
+            res.status(201).json({ message: "OK" });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(400).json({ message: "Something went wrong" });
+        });
+    }
 
 async function getAllComments(req, res) {
     try{
@@ -31,11 +33,17 @@ async function getAllComments(req, res) {
     const authors = await Promise.all(authorIDs.map(item => User.findById(item)));
 
     // correct order of authors to the order of comments:
-    const orderedAuthorIDs = comments.map(comment => comment.userId);
-    const orderedAuthors = orderedAuthorIDs.map(userId => authors.find(user => user._id.toString() === userId))
-    
+    // const orderedAuthorIDs = comments.map(comment => comment.userId);
+    // const orderedAuthors = orderedAuthorIDs.map(userId => authors.find(user => user._id.toString() === userId))
+    // console.log(orderedAuthors)
+
+    // add corresponding user obj using author id
+    const commentsWithAuthorObj = comments.map(comment => ({
+        ...comment.toObject(),
+        author: authors.find(author => author._id.toString() === comment.userId)
+      }));
     const token = generateToken(userId);
-    res.status(200).json({ comments: comments, authors: orderedAuthors, token: token });
+    res.status(200).json({ comments: commentsWithAuthorObj, token: token });
 } catch (error) {
     console.error("Error fetching comments:", error);
     res.status(500).json({ message: "Failed to fetch comments" });

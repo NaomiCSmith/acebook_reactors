@@ -27,7 +27,7 @@ export async function createComment(token, commentData) {
         body: JSON.stringify(commentData),
         };
 
-        const response = await fetch(`${BACKEND_URL}/comments/createcomment`, requestOptions);
+        const response = await fetch(`${BACKEND_URL}/createcomment`, requestOptions);
 
         if (response.status !== 201) {
             throw new Error("Unable to create comment");

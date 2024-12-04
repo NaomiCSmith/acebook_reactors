@@ -23,6 +23,7 @@ const CommentButton = ({ post, userID, token }) => {
                 const response = await getComments(token, post._id, userID);
                 if (response) {
                     setCommentsData(response.comments)
+                    // console.log("Frontend says:" + response.comments);
                     setError(null); 
                 }
             } catch (error) {
@@ -38,7 +39,8 @@ const CommentButton = ({ post, userID, token }) => {
         const commentBody = {
             postId: post._id,
             userId: userID,
-            message: commentContent
+            message: commentContent,
+            emptyAuthor: {username: ""}
         };
 
         try {
@@ -48,6 +50,7 @@ const CommentButton = ({ post, userID, token }) => {
                 setError(null);
 
                 setCommentsData([...commentsData, { _id: new Date().toISOString(), message: commentContent, userId: userID }]);
+                // console.log(commentsData)
                 post.commentCount += 1; 
             } else {
                 setError("Failed to create comment. Please try again.");
@@ -66,6 +69,8 @@ const CommentButton = ({ post, userID, token }) => {
         post.commentCount -= 1; 
     };
 
+    
+
     return (
         <div>
             <img
@@ -80,7 +85,7 @@ const CommentButton = ({ post, userID, token }) => {
                     {commentsData.length > 0 ? (
                         commentsData.map((comment) => (
                             <div className="comment-container" key={comment._id}>
-                                <Comment comment={comment} author={""} userID={userID} token={token} onCommentDeleted={handleCommentDeleted}/>
+                                <Comment comment={comment} userID={userID} token={token} onCommentDeleted={handleCommentDeleted}/>
                             </div>
                         ))
                     ) : (

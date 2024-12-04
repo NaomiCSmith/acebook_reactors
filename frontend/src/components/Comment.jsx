@@ -7,8 +7,6 @@ function Comment(props) {
     const [currentComment, setCurrentComment] = useState(props.comment.message)
     const [disabledButton, setDisabledbutton] = useState(true)
     const token = localStorage.getItem('token')
-    console.log(props.author)
-    console.log(props.comment.message)
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this comment?")) {
@@ -35,13 +33,12 @@ function Comment(props) {
         } catch (error) {
             console.error("Error updating comment:", error);
             alert("Failed to update the comment.");
-        }
-        
+        }   
     }
     
     return (
     <div className="comment">
-    <p className="comment-author"><strong>Author: </strong>{}</p>
+    <p className="comment-author"><strong>{props.comment.author.username}</strong></p>
     <textarea
     key={props.comment._id}
     className="comment-data"
