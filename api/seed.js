@@ -12,7 +12,7 @@ async function seedDatabase() {
     {
         email: 'kelly@makers.tech',
         password: '1234',
-        username: 'Kelly Howes'
+        username: 'Kelly'
     },
     {
         email: 'Aaron@makers.tech',
@@ -32,12 +32,12 @@ async function seedDatabase() {
     {
         email: 'abc@123.com',
         password: 'KimiPass',
-        username: 'Kimiko Dogue'
+        username: 'Kimiko'
     },
     {
         email: '123@abc.com',
         password: 'TwylaPass',
-        username: 'Twyla Kitty'
+        username: 'Twyla'
     }
     ];
 

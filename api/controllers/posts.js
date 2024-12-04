@@ -4,6 +4,12 @@ const mongoose = require('mongoose');
 const Comment = require("../models/comment");
 const User = require("../models/user")
 
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+const path = require('path');
+const { storage } = require('../config/cloudinary');
+const upload = multer({ storage });
+
 async function getAllPosts(req, res) {
   const posts = await Post.find().sort({createdAt: -1});
   const token = generateToken(req.user_id);
@@ -22,11 +28,31 @@ async function getAllPosts(req, res) {
 }
 
 async function createPost(req, res) {
-  const post = new Post(req.body);
-  await post.save();
+  try{
+    let imageUrl = null;
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: 'posts', 
+      });
+      imageUrl = result.secure_url;
+    }
 
-  const newToken = generateToken(req.user_id);
-  res.status(201).json({ message: "Post created", token: newToken });
+    const post = new Post({
+      message: req.body.message,
+      userId: req.body.userId,
+      image: imageUrl,
+    });
+
+    await post.save();
+    const newToken = generateToken(req.user_id);
+    res.status(201).json({ message: "Post created", token: newToken });
+  } catch(error){
+    console.error("Error creating post:", error);
+    res.status(500).json({ message: "Failed to create post", error });
+
+  }
+  
+
 }
 
 async function likePost(req, res) {

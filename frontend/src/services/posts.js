@@ -26,9 +26,8 @@ export async function createPost(token, postData) {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(postData),
+    body: postData,
   };
 
   const response = await fetch(`${BACKEND_URL}/posts/createpost`, requestOptions);
