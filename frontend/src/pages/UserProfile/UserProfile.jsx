@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getUserProfile, addFriend } from "../../services/users";
+import { getUserProfile, addFriend, getUserFriends } from "../../services/users";
 import Header from "../Header/Header";
 import "./UserProfile.css"
 import defaultAvatar from "../../assets/default-avatar.png";
@@ -11,15 +11,24 @@ export const UserProfile = () => {
     const loggedInUser = localStorage.getItem('userID');
     const [user, setUser] = useState(null);
     const [isFriend, setIsFriend] = useState(false)
+    const [friends, setFriends] = useState([])
 
     useEffect(() => {
     const fetchUser = async () => {
         try {
             const userData = await getUserProfile(token,userId);
+            
             setUser(userData);
-            if (userData.friends.includes(loggedInUser)) {
-                setIsFriend(true);
+            userData.friends.forEach((friend) => {
+                if(friend._id === loggedInUser)
+                setIsFriend(true)
             }
+            
+            )
+            
+            const userFriends = await getUserFriends(token, userId);
+            
+            setFriends(userFriends);
         } catch (error) {
             console.error("Error fetching user profile:", error);
         }
@@ -34,7 +43,7 @@ export const UserProfile = () => {
             await addFriend(token, userId, loggedInUser);
             setIsFriend(true);
         } catch (error) {
-            console.error("Error adding friend:", error);
+            console.error("Error adding follower:", error);
         }
     };
 
@@ -48,7 +57,24 @@ export const UserProfile = () => {
         <h1>{user.username}</h1>
         <img className="user-photo" src={user.photo || defaultAvatar} alt="photo of user"/>
         <p>Email: {user.email}</p>
-        <button className={isFriend ? "friend": "add-friend"} onClick={handleAddFriend} disabled={isFriend}>{isFriend ? "Already Friends" : "Add Friend"}</button>
+        <button className={isFriend ? "friend": "add-friend"} onClick={handleAddFriend} disabled={isFriend}>{isFriend ? "Already Following" : "Follow"}</button>
+        <h2>Follower List</h2>
+        {friends.length > 0 ? (
+            <ul>
+            {friends.map((friend) => (
+                <li key={friend._id}>
+                <img
+                src={friend.photo || defaultAvatar}
+                alt={`${friend.username}'s avatar`}
+                className="friend-avatar"
+                />
+            <span>{friend.username}</span>
+            </li>
+            ))}
+        </ul>
+        ) : (
+        <p>No followers yet.</p>
+        )}
     </div>
     );
 };

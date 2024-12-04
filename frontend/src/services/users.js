@@ -74,3 +74,22 @@ export async function addFriend(token, userId, loggedInUser) {
 }
 
 
+export async function getUserFriends(token, userId) {
+    
+    const requestOptions = {
+        method: "GET",
+        headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+        },
+    };
+
+    const response = await fetch(`${BACKEND_URL}/users/${userId}`, requestOptions);
+
+    if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+    }
+
+    const userData = await response.json();
+    return userData.friends;
+    }

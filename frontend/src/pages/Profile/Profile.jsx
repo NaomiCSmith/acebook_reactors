@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import "./profile.css";
 import defaultAvatar from "../../assets/default-avatar.png";
+import { getUserFriends } from "../../services/users";
 
 
 export const Profile = () => {
@@ -14,7 +15,9 @@ export const Profile = () => {
   const [password, setPassword] = useState("******");
   // const [photo, setPhoto] = useState("");
   const [photo, setPhoto] = useState(""); // Initialize with default avatar
-
+  const token = localStorage.getItem('token')
+  const [friends, setFriends] = useState([])
+  
 
   const userID = localStorage.getItem("userID");
 
@@ -28,12 +31,14 @@ export const Profile = () => {
         setEmail(data.email);
         setPassword(data.password); // Store the actual password when fetching user data
         setPhoto(data.photo);
+        const userFriends = await getUserFriends(token, userID);
+        setFriends(userFriends);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
     fetchUser();
-  }, [userID]);
+  }, [userID, token]);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -196,9 +201,26 @@ export const Profile = () => {
                         <strong>Password:</strong> ****** {/* Mask password */}
                       </li>
                     </ul>
+                    <p><strong>Followers</strong></p>
+                    {friends.length > 0 ? (
+            <ul>
+            {friends.map((friend) => (
+                <li key={friend._id}>
+                <img
+                src={friend.photo || defaultAvatar}
+                alt={`${friend.username}'s avatar`}
+                className="friend-avatar"
+                />
+            <span>{friend.username}</span>
+            </li>
+            ))}
+        </ul>
+        ) : (
+        <p>No followers yet.</p>
+        )}
                     <div className="text-center mt-4">
                       <button
-                        className="btn btn-primary btn-lg"
+                        className="btn btn-lg edit-button"
                         onClick={() => setIsEditing(true)}
                       >
                         Edit Profile

@@ -86,3 +86,20 @@ button {
 .profile-photo-wrapper:hover .profile-photo {
   transform: scale(1.1);
 }
+
+.edit-button{
+padding: 8px 12px;
+margin: 5px;
+font-size: 20px;
+border: 1px solid black;
+border-radius: 20px;
+background-color: #0ef968;
+cursor: pointer;
+transition: background-color 0.3s ease;
+font-weight: bold;
+}
+
+.edit-button:hover {
+background-color: yellow;
+border: 1px solid black;
+}

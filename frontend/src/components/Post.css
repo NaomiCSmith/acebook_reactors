@@ -46,5 +46,11 @@
 
 .author:hover{
     background-color: yellow;
-    border-radius: 8px;
+    border-radius: 2px;
+}
+
+.text-click-delete:hover{
+    background-color: red;
+    color: white;
+    cursor: pointer;
 }
