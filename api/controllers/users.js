@@ -1,44 +1,73 @@
 const User = require("../models/user");
 const multer = require("multer");
 const mongoose = require("mongoose");
-// Configure Multer for saving files locally
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Save files to the 'uploads/' directory
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Unique file names
-  },
-});
-const upload = multer({ storage }); // Multer middleware
+const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
+const upload = require('../middleware/multer');
+
 /**
 * Create a new user.
 */
+
 async function create(req, res) {
-  upload.single("photo")(req, res, async (err) => {
-    if (err) {
-      console.error("Multer error:", err);
-      return res.status(500).json({ message: "File upload failed" });
+  const { email, password, username } = req.body;
+
+  if (!email || !password || !username) {
+    return res.status(400).json({ message: 'All fields are required.' });
+  }
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email already in use' });
     }
-    const { email, password, username } = req.body;
-    if (!email || !password || !username) {
-      return res.status(400).json({ message: "All fields are required." });
+
+    let photoUrl = null;
+
+    if (req.file) {
+      
+      photoUrl = await new Promise((resolve, reject) => {
+        const cloudinaryResult = cloudinary.uploader.upload_stream(
+          { folder: 'user_photos' }, 
+          (error, result) => {
+            if (error) {
+              console.error("Cloudinary upload error:", error);
+              reject(error); 
+            } else {
+              resolve(result.secure_url);  
+            }
+          }
+        );
+
+        cloudinaryResult.end(req.file.buffer);
+      });
     }
-    const photoPath = req.file ? `/uploads/${req.file.filename}` : null;
-    try {
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return res.status(400).json({ message: "Email already in use" });
-      }
-      const user = new User({ email, password, username, photo: photoPath });
-      const savedUser = await user.save();
-      res.status(201).json({ message: "User created successfully", user: savedUser });
-    } catch (error) {
-      console.error("Error creating user:", error);
-      res.status(400).json({ message: "Something went wrong", error: error.message });
-    }
-  });
+    const user = new User({
+      email,
+      password,
+      username,
+      photo: photoUrl, 
+    });
+
+    const savedUser = await user.save();
+
+    res.status(201).json({
+      message: 'User created successfully',
+      user: savedUser,
+    });
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.status(500).json({
+      message: 'Something went wrong while creating user',
+      error: error.message,
+    });
+  }
 }
+
+
+
+
+
 /**
 * Find a user by email.
 */
@@ -147,34 +176,46 @@ async function update(req, res) {
   }
 }
 
+const uploadProfilePhoto = async (req, res) => {
+  const { userId } = req.body;
 
-/**
-* Upload or update profile photo.
-*/
-function uploadProfilePhoto(req, res) {
-  upload.single("file")(req, res, async (err) => {
-    if (err) {
-      console.error("Multer error:", err);
-      return res.status(500).json({ message: "Failed to upload image" });
-    }
-    const { userId, username, email, password } = req.body;
-    const filePath = `/uploads/${req.file.filename}`;
-    try {
-      const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { username, email, password, photo: filePath },
-        { new: true }
-      );
-      if (!updatedUser) {
-        return res.status(404).json({ message: "User not found" });
+  
+  if (!req.file) {
+    return res.status(400).json({ message: "No file uploaded" });
+  }
+
+  try {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        resource_type: 'auto',  
+        folder: 'profile_photos', 
+      },
+      async (error, result) => {
+        if (error) {
+          return res.status(500).json({ error: 'Failed to upload photo to Cloudinary' });
+        }
+        
+
+        const user = await User.findByIdAndUpdate(
+          userId,
+          { photo: result.secure_url },  
+          { new: true }
+        );
+
+        if (!user) {
+          return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json({ message: "Profile photo updated successfully!", user });
       }
-      res.status(200).json({ message: "Profile updated", user: updatedUser });
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      res.status(500).json({ message: "Failed to update profile" });
-    }
-  });
-}
+    );
+
+    stream.end(req.file.buffer); 
+  } catch (error) {
+    console.error("Error uploading profile photo:", error);
+    res.status(500).json({ error: "Failed to update photo." });
+  }
+};
 
 const getUserProfile = async (req, res) => {
   try {

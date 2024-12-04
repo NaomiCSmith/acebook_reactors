@@ -1,82 +1,48 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signupUser } from "../../services/users"; 
 
 export function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [photo, setPhoto] = useState(null); // Handle file input
+  const [photo, setPhoto] = useState(null); 
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setPhoto(file);
-    console.log("File selected:", file); // Debug log
+    setPhoto(file); 
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       setErrorMessage("");
-  
+
       const formData = new FormData();
       formData.append("email", email);
       formData.append("password", password);
       formData.append("username", username);
       if (photo) {
-        formData.append("photo", photo);
-        console.log("Photo attached to formData:", photo.name); // Debug log
+        formData.append("photo", photo); 
       }
-  
-      const response = await fetch("http://localhost:3000/users", {
-        method: "POST",
-        body: formData,
-      });
-  
-      const data = await response.json();
-      console.log("Response from server:", data); // Debug log
-  
-      if (response.ok) {
-        console.log("Signup successful, redirecting...");
-        navigate("/login");
-      } else {
-        if (data.message === "Email already in use") {
-          setErrorMessage("This email is already registered. Please use a different email.");
-        } else {
-          console.error("Error response from server:", data);
-          setErrorMessage(data.message || "Signup failed. Please try again.");
-        }
-      }
+
+      const data = await signupUser(formData); 
+
+      console.log("Signup successful:", data);
+      navigate("/login"); 
     } catch (error) {
       console.error("Error during signup:", error);
-      setErrorMessage("An unexpected error occurred. Please try again.");
+      setErrorMessage(error.message); 
     }
-// <<<<<<< post_username
-//   }
-
-//   localStorage.setItem("username", username);
-
-//   function handleEmailChange(event) {
-//     setEmail(event.target.value);
-//   }
-
-//   function handlePasswordChange(event) {
-//     setPassword(event.target.value);
-//   }
-
-//   function handleUsernameChange(event) {
-//     setUsername(event.target.value)
-//   }
-// =======
   };
-  
 
   return (
-    <>
+    <div>
       <h2>Signup</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
           id="username"
@@ -85,6 +51,8 @@ export function SignupPage() {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
+        <br/>
+        <br/>
         <label htmlFor="email">Email:</label>
         <input
           id="email"
@@ -93,9 +61,10 @@ export function SignupPage() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <br/>
+        <br/>
         <label htmlFor="password">Password:</label>
         <input
-          placeholder="Password"
           id="password"
           type="password"
           value={password}
@@ -103,10 +72,13 @@ export function SignupPage() {
           required
           minLength={6}
         />
+        <br/>
+        <br/>
         <label htmlFor="photo">Profile Photo (optional):</label>
         <input id="photo" type="file" onChange={handleFileChange} />
-        <input role="submit-button" id="submit" type="submit" value="Submit" />
+        <button type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
+
