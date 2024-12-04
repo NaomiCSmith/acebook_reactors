@@ -13,6 +13,7 @@ const PostSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     default: [],
   },
+  image: { type: String },
 }, { timestamps: true }
 );
 

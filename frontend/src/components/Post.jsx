@@ -62,7 +62,7 @@ const handleAuthorClick = () => {
             )}
 
   </div>
-
+  {props.post.image && <img className="post-image"src={props.post.image} alt="Post Image" />}
 <textarea
     key={props.post._id}
     className="post-data"
