@@ -18,10 +18,11 @@ describe("Post model", () => {
   });
 
   it("can save a post", async () => {
-    const post = new Post({ message: "some message" });
+    const post = new Post({ message: "some message", userId: "dev1"});
 
     await post.save();
     const posts = await Post.find();
+
     expect(posts[0].message).toEqual("some message");
   });
 });
