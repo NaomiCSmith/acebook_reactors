@@ -24,3 +24,25 @@
     height: 150px;
     border-radius: 50%;
 }
+
+h2{
+    margin-top: 20px;
+}
+
+.friend-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 10;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}

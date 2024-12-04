@@ -55,7 +55,7 @@ const handleAuthorClick = () => {
   <p onClick={handleAuthorClick} className="author"><strong>Author: </strong>{postAuthor}</p>
     {props.post.userId === userID && (
       <>
-        <p className="text-click" onClick={handleDelete}>Delete</p>
+        <p className="text-click-delete" onClick={handleDelete}>Delete</p>
         <p className="text-click" onClick={handleEdit}>{disabledButton ? 'Edit' : ''}</p>
         {!disabledButton && (<p className="text-click" onClick={handleAmend}>Save</p>)}
       </>

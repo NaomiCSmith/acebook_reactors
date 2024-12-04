@@ -54,7 +54,7 @@ function Comment(props) {
     </textarea>
     {props.comment.userId === props.userID && (
         <div className="edit-delete-container">
-            <p className="text-click" onClick={handleDelete}>Delete</p>
+            <p className="text-click-delete" onClick={handleDelete}>Delete</p>
             <p className="text-click" onClick={handleEdit}>{disabledButton ? 'Edit' : ''}</p>
             {!disabledButton && (<p className="text-click" onClick={handleAmend}>Save</p>)}
         </div>

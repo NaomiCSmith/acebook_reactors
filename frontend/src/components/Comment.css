@@ -8,7 +8,13 @@
 
 .text-click:hover{
     background-color: #0ef968;
-    border-radius: 8px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.text-click-delete:hover{
+    background-color: red;
+    border-radius: 2px;
     cursor: pointer;
 }
 
@@ -27,5 +33,6 @@
 .comment-author:hover{
     cursor: pointer;
     background-color: yellow;
-    border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }

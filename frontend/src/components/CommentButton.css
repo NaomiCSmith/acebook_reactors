@@ -8,35 +8,33 @@ img:hover{
 }
 
 .add-comment {
-    padding: 5px 15px;
+    padding: 5px 5px;
+    margin-bottom: 5px;
     font-size: 15px;
-    border: none;
+    border: 1px solid black;
     border-radius: 20px;
-    background-color: orchid;
-    color: white;
+    background-color: #0ef968;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .add-comment:hover {
-    background-color: mediumorchid;
-    color: white;
+    background-color: yellow;
 }
 
 .post-comment {
-    padding: 5px 15px;
+    padding: 5px 5px;
     font-size: 15px;
-    border: none;
+    border: 1px solid black;
     border-radius: 20px;
-    background-color: orchid;
-    color: white;
+    background-color: #0ef968;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .post-comment:hover {
-    background-color: mediumorchid;
-    color: white;
+    background-color: yellow;
+    
 }
 
 .comment-container{
