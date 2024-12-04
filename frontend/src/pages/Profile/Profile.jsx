@@ -26,7 +26,7 @@ export const Profile = () => {
         setUser(data);
         setUsername(data.username);
         setEmail(data.email);
-        setPassword("******"); // Mask password for display
+        setPassword(data.password); // Mask password for display
         setPhoto(data.photo || defaultAvatar); // Set photo or default avatar
 
         const userFriends = await getUserFriends(token, userID);

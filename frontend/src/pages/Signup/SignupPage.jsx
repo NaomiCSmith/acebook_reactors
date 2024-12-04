@@ -51,6 +51,8 @@ export function SignupPage() {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
+        <br/>
+        <br/>
         <label htmlFor="email">Email:</label>
         <input
           id="email"
@@ -59,6 +61,8 @@ export function SignupPage() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <br/>
+        <br/>
         <label htmlFor="password">Password:</label>
         <input
           id="password"
@@ -68,6 +72,8 @@ export function SignupPage() {
           required
           minLength={6}
         />
+        <br/>
+        <br/>
         <label htmlFor="photo">Profile Photo (optional):</label>
         <input id="photo" type="file" onChange={handleFileChange} />
         <button type="submit">Sign Up</button>

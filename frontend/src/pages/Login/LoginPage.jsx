@@ -45,6 +45,8 @@ export function LoginPage() {
           value={email}
           onChange={handleEmailChange}
         />
+        <br/>
+        <br/>
         <label htmlFor="password">Password:</label>
         <input
           id="password"
