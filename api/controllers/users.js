@@ -217,7 +217,7 @@ const addFriend = async (req, res) => {
     await currentUser.save();
     await userToAdd.save();
 
-    res.status(200).json({ message: "Friend added successfully" });
+    res.status(200).json({ message: "Friend added successfully", user: userToAdd });
   } catch (error) {
     console.error("Error adding friend:", error);
     res.status(500).json({ message: "Server error" });

@@ -17,8 +17,8 @@ export const UserProfile = () => {
     const fetchUser = async () => {
         try {
             const userData = await getUserProfile(token,userId);
-            
             setUser(userData);
+
             userData.friends.forEach((friend) => {
                 if(friend._id === loggedInUser)
                 setIsFriend(true)
@@ -27,7 +27,6 @@ export const UserProfile = () => {
             )
             
             const userFriends = await getUserFriends(token, userId);
-            
             setFriends(userFriends);
         } catch (error) {
             console.error("Error fetching user profile:", error);
@@ -40,7 +39,9 @@ export const UserProfile = () => {
 
     const handleAddFriend = async () => {
         try {
-            await addFriend(token, userId, loggedInUser);
+            const addedFriend = await addFriend(token, userId, loggedInUser);
+            
+            setFriends(prevFriends => [...prevFriends, addedFriend.user]);
             setIsFriend(true);
         } catch (error) {
             console.error("Error adding follower:", error);
@@ -57,8 +58,10 @@ export const UserProfile = () => {
         <h1>{user.username}</h1>
         <img className="user-photo" src={user.photo || defaultAvatar} alt="photo of user"/>
         <p>Email: {user.email}</p>
+        {user._id != loggedInUser && (
         <button className={isFriend ? "friend": "add-friend"} onClick={handleAddFriend} disabled={isFriend}>{isFriend ? "Already Following" : "Follow"}</button>
-        <h2>Follower List</h2>
+        )}
+        <h2>Followers</h2>
         {friends.length > 0 ? (
             <ul>
             {friends.map((friend) => (
