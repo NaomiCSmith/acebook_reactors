@@ -12,7 +12,9 @@ function Comment(props) {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
-    const date = new Date(props.comment.createdAt);
+    const createdAt = props.comment.createdAt || new Date().toISOString();
+
+    const date = new Date(createdAt);
 
     const formattedDate = date.toLocaleString('en-US', {
         weekday: 'short',      
