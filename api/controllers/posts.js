@@ -11,7 +11,7 @@ const { storage } = require('../config/cloudinary');
 const upload = multer({ storage });
 
 async function getAllPosts(req, res) {
-  const posts = await Post.find().sort({createdAt: -1});
+  const posts = await Post.find().sort({createdAt: 'desc'});
   const token = generateToken(req.user_id);
   const postsWithCommentCountandAuthor = await Promise.all(
     posts.map(async (post) => {
@@ -35,6 +35,8 @@ async function createPost(req, res) {
         folder: 'posts', 
       });
       imageUrl = result.secure_url;
+      console.log("IMAGE URL: ", result.secure_url);
+      
     }
 
     const post = new Post({

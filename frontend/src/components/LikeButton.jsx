@@ -41,12 +41,9 @@ const LikeButton = ({post, userID}) => {
 
     return (
         <div>
-            <img src={isLiked ? './liked.png' : './unliked.png'} onClick={changeLike} alt="thumbs up button"/>
+            <img className="like-button" src={isLiked ? './liked.png' : './unliked.png'} onClick={changeLike} alt="thumbs up button"/>
             <span> {likes} {likes === 1? 'like' : 'likes'}</span> 
             <br></br>
-            {/* <button className={`LikeButton ${isLiked ? "isLiked" : ""}`} onClick={changeLike}>
-                {isLiked ? 'Liked' : 'Like'}
-            </button> */}
             {error && <p>{error}</p>}
         </div>
     );

@@ -73,6 +73,7 @@ const CommentButton = ({ post, userID, token }) => {
                 src="../chat.png"
                 alt="comment speech bubble"
                 onClick={seeComments}
+                className="show-comment-img"
             />
             {/* {post.commentCount === 1 ? " Comment" : " Comments"} {post.commentCount} */}
             {post.commentCount}

@@ -18,8 +18,16 @@
     cursor: pointer;
 }
 
+.text-click-delete{
+    margin-left: 5px;
+}
+
+.text-click{
+    margin-right: 5px;
+}
+
 .comment-data{
-    width:95%;
+    width:100%;
     background-color: white;
     border: none;
     text-align: center;
@@ -49,4 +57,11 @@
 .comment-author{
     margin: 3px auto;
     cursor: pointer;
+}
+
+.comment-date-time{
+    font-size: 0.75em;
+    margin:auto;
+    padding: 10px;
+    border-top: 1px solid black;
 }
