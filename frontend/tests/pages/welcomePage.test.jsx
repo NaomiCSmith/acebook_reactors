@@ -12,7 +12,7 @@ describe("Welcome Page", () => {
                 <WelcomePage />
             </BrowserRouter>
         );
-        const tagline = screen.getByText("Welcome, developer!");
+        const tagline = screen.getByText("Welcome");
         expect(tagline).not.toBeNull()
     });
 
