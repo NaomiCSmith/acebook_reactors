@@ -1,27 +1,38 @@
 /* Wrapper for the entire feed */
 .feed-container {
-    max-width: 70%; /* Maximum width of the feed */
+    max-width: 60%; /* Maximum width of the feed */
     margin: 0 auto; /* Center the feed horizontally */
     padding: 20px;
-    /* background-color: #fff; Optional: Light background for contrast */
     border-radius: 8px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Subtle shadow for a clean look */
   }
+
+  .feed-container h2 {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
   
   /* Posts are spaced evenly */
   .feed {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Add space between posts */
+    gap: 5px; /* Add space between posts */
   }
   
   /* Individual post wrapper */
   .post-wrapper {
-    /* background: #ffffff; */
     border-radius: 5px;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Subtle shadow for individual posts */
     padding: 10px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.5s ease-in-out;
   }
+
+  .post-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(14, 249, 104, 1);
+}
+
   
   /* Center align the action buttons */
   .action-buttons {
@@ -31,13 +42,18 @@
   .create-post{
     background-color: #0ef968;
     border: 1px solid black;
+    border-radius: 25px;
     font-weight: bold;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 16px
   }
 
   .create-post:hover{
     background-color: yellow;
     color: black;
     border: 1px solid black;
-    font-weight: bold;
+    transform: scale(1.05);
   }
   

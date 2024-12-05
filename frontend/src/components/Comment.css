@@ -19,20 +19,34 @@
 }
 
 .comment-data{
-    width:80%;
+    width:95%;
     background-color: white;
     border: none;
     text-align: center;
 }
 
-.comment-author{
+
+.author-container{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
     border-bottom: 1px solid grey;
     margin-bottom: 5px;
+    width: 100%;
+    transition: transform 0.2s ease-in-out, box-shadow 0.5s ease-in-out;
 }
 
-.comment-author:hover{
+.author-container:hover{
+    transform: translateY(5px); 
+    box-shadow: 0 6px 12px rgba(14, 249, 104, 1);
+}
+
+.author-image{
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: 3px auto;
+}
+.comment-author{
+    margin: 3px auto;
     cursor: pointer;
-    background-color: yellow;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
 }

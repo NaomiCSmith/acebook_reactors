@@ -32,6 +32,13 @@
     align-items: center;
     border-bottom: 1px solid grey;
     margin-bottom: 5px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+
+.author-delete-container:hover{
+    transform: translateY(5px); 
+    box-shadow: 0 6px 12px rgba(255, 255, 0, 1);
 }
 
 .post-data{

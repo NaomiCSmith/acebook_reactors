@@ -1,13 +1,35 @@
 import {deleteComment, updateComment} from "../services/comments";
 import "./Comment.css"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import { useNavigate } from "react-router-dom";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import defaultAvatar from "../assets/default-avatar.png"
 
 function Comment(props) {
     const [currentComment, setCurrentComment] = useState(props.comment.message)
     const [disabledButton, setDisabledbutton] = useState(true)
     const token = localStorage.getItem('token')
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+            const response = await fetch(`${BACKEND_URL}/users/findById/${props.comment.userId}`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch user data");
+            }
+            const userData = await response.json();
+            
+            setUser(userData);
+            } catch (error) {
+            console.error("Error fetching user data:", error);
+            }
+        };
+    
+        if (props.comment.userId) {
+            fetchUser();
+        }
+        }, [props.comment.userId]);
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this comment?")) {
@@ -44,7 +66,11 @@ function Comment(props) {
     
     return (
     <div className="comment">
-    <p onClick={handleAuthorClick} className="comment-author"><strong>Author: </strong>{props.comment.userId}</p>
+        <div className="author-container">
+        <p onClick={handleAuthorClick} className="comment-author"><strong>Author: </strong>{user ? user.username : props.comment.userid}</p>
+        <img onClick={handleAuthorClick} className="author-image" src={user ? user.photo : defaultAvatar} />
+
+    </div>
     <textarea
     key={props.comment._id}
     className="comment-data"
