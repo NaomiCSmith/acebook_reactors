@@ -12,32 +12,38 @@ async function seedDatabase() {
     {
         email: 'kelly@makers.tech',
         password: '1234',
-        username: 'Kelly'
+        username: 'Kelly',
+        photo: "https://res.cloudinary.com/depvdk2lj/image/upload/v1733386868/profile_photos/zbsfsqpb3ct2vdpwq1fx.jpg"
     },
     {
         email: 'Aaron@makers.tech',
         password: 'AaronPass',
-        username: 'Aaron '
+        username: 'Aaron ',
+        photo: "https://res.cloudinary.com/depvdk2lj/image/upload/v1733386989/profile_photos/taorilq2rlewycbu20uz.png"
     },
     {
         email: 'Ben@makers.tech',
         password: 'BenPass',
-        username: 'Ben'
+        username: 'Ben',
+        photo: "https://res.cloudinary.com/depvdk2lj/image/upload/v1733387039/profile_photos/tlyrhcmwdwm0tzxm15aa.jpg"
     },
     {
         email: 'Naomi@makers.tech',
         password: 'NaomiPass',
-        username: 'Naomi'
+        username: 'Naomi',
+        photo: "https://res.cloudinary.com/depvdk2lj/image/upload/v1733387092/profile_photos/lljgd71g9x2jz4lvhd5x.jpg"
     },
     {
         email: 'abc@123.com',
         password: 'KimiPass',
-        username: 'Kimiko'
+        username: 'Kimiko',
+        photo: "https://res.cloudinary.com/depvdk2lj/image/upload/v1733387287/profile_photos/gyegqhx9umua6rjzjd5j.jpg"
     },
     {
         email: '123@abc.com',
         password: 'TwylaPass',
-        username: 'Twyla'
+        username: 'Twyla',
+        photo: "https://res.cloudinary.com/depvdk2lj/image/upload/v1733387336/profile_photos/qoj3xrxiuzlxylirg0ta.jpg"
     }
     ];
 
