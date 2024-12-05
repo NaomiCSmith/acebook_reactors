@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signupUser } from "../../services/users"; 
+import NoLoginHeader from "../../components/NoLoginHeader"
 
 export function SignupPage() {
   const [email, setEmail] = useState("");
@@ -40,6 +41,7 @@ export function SignupPage() {
 
   return (
     <div>
+      <NoLoginHeader />
       <h2>Signup</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
@@ -76,6 +78,8 @@ export function SignupPage() {
         <br/>
         <label htmlFor="photo">Profile Photo (optional):</label>
         <input id="photo" type="file" onChange={handleFileChange} />
+        <br/>
+        <br/>
         <button type="submit">Sign Up</button>
       </form>
     </div>

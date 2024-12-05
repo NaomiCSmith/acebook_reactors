@@ -1,9 +1,9 @@
 /* Wrapper for the entire feed */
 .feed-container {
-    max-width: 800px; /* Maximum width of the feed */
+    max-width: 70%; /* Maximum width of the feed */
     margin: 0 auto; /* Center the feed horizontally */
     padding: 20px;
-    background-color: #f9f9f9; /* Optional: Light background for contrast */
+    /* background-color: #fff; Optional: Light background for contrast */
     border-radius: 8px;
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Subtle shadow for a clean look */
   }
@@ -17,9 +17,9 @@
   
   /* Individual post wrapper */
   .post-wrapper {
-    background: #ffffff;
+    /* background: #ffffff; */
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for individual posts */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Subtle shadow for individual posts */
     padding: 10px;
   }
   

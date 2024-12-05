@@ -121,30 +121,6 @@ async function findById(req, res) {
     res.status(500).json({ message: "Something went wrong", error: err.message });
   }
 }
-/**
-* Update user information.
-*/
-// async function update(req, res) {
-//   const userId = req.params.id;
-//   const { username, email, password } = req.body;
-//   if (!mongoose.Types.ObjectId.isValid(userId)) {
-//     return res.status(400).json({ message: "Invalid User ID format" });
-//   }
-//   try {
-//     const updatedUser = await User.findByIdAndUpdate(
-//       userId,
-//       { username, email, password },
-//       { new: true }
-//     );
-//     if (!updatedUser) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-//     res.status(200).json({ message: "User updated successfully", user: updatedUser });
-//   } catch (err) {
-//     console.error("Error updating user:", err);
-//     res.status(500).json({ message: "Failed to update user" });
-//   }
-// }
 
 async function update(req, res) {
   const userId = req.params.id;
@@ -264,6 +240,7 @@ const addFriend = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 const UsersController = {
   create,

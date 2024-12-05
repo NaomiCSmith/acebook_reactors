@@ -1,0 +1,17 @@
+.login-submit {
+    padding: 8px 12px;
+    margin: 5px;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #0ef968;
+    color:black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.login-submit:hover {
+    background-color: yellow;
+    color:black;
+}
