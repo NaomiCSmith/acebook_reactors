@@ -18,7 +18,7 @@ async function seedDatabase() {
     const userData = [
     {
         email: 'kelly@makers.tech',
-        password: '1234',
+        password: 'KellyPass',
         username: 'Kelly',
         photo: "https://res.cloudinary.com/depvdk2lj/image/upload/v1733386868/profile_photos/zbsfsqpb3ct2vdpwq1fx.jpg"
     },
