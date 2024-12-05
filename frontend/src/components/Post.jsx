@@ -4,6 +4,7 @@ import CommentButton from "../components/CommentButton"
 import {deletePost, updatePost} from "../services/posts"
 import {useState} from "react"
 import { useNavigate } from "react-router-dom";
+import defaultAvatar from "../assets/default-avatar.png";
 
 
 function Post(props) {
@@ -53,6 +54,7 @@ const handleAuthorClick = () => {
   <div className="post">
   <div className="author-delete-container">
   <p onClick={handleAuthorClick} className="author"><strong>Author: </strong>{postAuthor}</p>
+  <img className="post-author-pic" onClick={handleAuthorClick} src={props.post.postAuthor.photo || defaultAvatar}/>
     {props.post.userId === userID && (
       <>
         <p className="text-click-delete" onClick={handleDelete}>Delete</p>
