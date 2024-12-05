@@ -24,7 +24,7 @@ async function getAllComments(req, res) {
     const postId = req.params.postId
     const userId =  req.query.user_id;
     
-    const comments = await Comment.find({postId: postId.toString()});
+    const comments = await Comment.find({postId: postId.toString()}).sort({createdAt: 'asc'});
     const token = generateToken(userId);
     res.status(200).json({ comments: comments, token: token });
     } catch (error) {

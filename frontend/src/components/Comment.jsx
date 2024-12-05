@@ -11,6 +11,20 @@ function Comment(props) {
     const token = localStorage.getItem('token')
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+
+    const date = new Date(props.comment.createdAt);
+
+    const formattedDate = date.toLocaleString('en-US', {
+        weekday: 'short',      
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric', 
+        hour: 'numeric', 
+        minute: '2-digit', 
+        hour12: true   
+    });
+
+
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -78,6 +92,9 @@ function Comment(props) {
     disabled={disabledButton}
     onChange={(event) => setCurrentComment(event.target.value)}>
     </textarea>
+    <div className="comment-date-time">
+        <p>Commented on: {formattedDate}</p>
+    </div>
     {props.comment.userId === props.userID && (
         <div className="edit-delete-container">
             <p className="text-click-delete" onClick={handleDelete}>Delete</p>

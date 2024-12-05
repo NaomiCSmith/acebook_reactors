@@ -14,6 +14,18 @@ function Post(props) {
   const token = localStorage.getItem('token')
   const postAuthor = props.post.postAuthor.username
   const navigate = useNavigate();
+  const date = new Date(props.post.createdAt);
+
+  const formattedDate = date.toLocaleString('en-US', {
+    weekday: 'short',      
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric', 
+    hour: 'numeric', 
+    minute: '2-digit', 
+    hour12: true   
+  });
+
 
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this post?")) {
@@ -78,6 +90,9 @@ const handleAuthorClick = () => {
   <CommentButton className="comment" post={props.post} userID={userID} token={token}/>
   </div>
   <br />
+  <div className="post-date-time">
+    <p>Posted: {formattedDate}</p>
+  </div>
   </div>
   )
 }
