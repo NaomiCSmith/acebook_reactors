@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authentication";
 import { getUserByEmail } from "../../services/users";
-// import { locals } from "../../../../api/app";
-
+import NoLoginHeader from "../../components/NoLoginHeader"
+import "../Login/LoginPage.css"
 
 export function LoginPage() {
   const [email, setEmail] = useState("");
@@ -36,6 +36,7 @@ export function LoginPage() {
 
   return (
     <>
+    <NoLoginHeader />
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
@@ -54,7 +55,9 @@ export function LoginPage() {
           value={password}
           onChange={handlePasswordChange}
         />
-        <input role="submit-button" id="submit" type="submit" value="Submit" />
+        <br/>
+        <br/>
+        <input className="login-submit"role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
     </>
   )

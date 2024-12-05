@@ -58,7 +58,7 @@ const userId = localStorage.getItem("userID");
         {createdPost ? <h2>Post successfully created!</h2> : null}
         {returnedPost ? <Link to='/posts'><h3 className="return">Return to Posts</h3></Link> : null}
         <h1>Submit a post:</h1>
-        <form onSubmit={handleSubmit}>
+        <form className="post-form" onSubmit={handleSubmit}>
         <label htmlFor='post-body'>
             <br />
             <textarea

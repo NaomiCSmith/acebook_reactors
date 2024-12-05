@@ -1,8 +1,29 @@
+.post-form{
+    border: 1px solid black;
+    margin: 10px 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    box-shadow: 0 6px 12px rgba(14, 249, 104, 1);
+}
+
+h1{
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+#post-body{
+    margin-bottom: 20px;
+}
+
 .submit-post{
     background-color: #0ef968;
     border: 1px solid black;
     font-weight: bold;
     border-radius: 8px;
+    margin: 20px auto;
 }
 
 .submit-post:hover{
