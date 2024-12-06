@@ -40,17 +40,15 @@ const CommentButton = ({ post, userID, token }) => {
             postId: post._id,
             userId: userID,
             message: commentContent,
-            emptyAuthor: {username: ""}
         };
 
         try {
             const data = await createComment(token, commentBody);
             if (data.message === "OK") {
-                setCommentContent('');
+                setCommentContent(commentBody);
                 setError(null);
 
                 setCommentsData([...commentsData, { _id: new Date().toISOString(), message: commentContent, userId: userID }]);
-                // console.log(commentsData)
                 post.commentCount += 1; 
             } else {
                 setError("Failed to create comment. Please try again.");

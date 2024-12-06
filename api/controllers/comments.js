@@ -7,10 +7,8 @@ async function create(req, res) {
     const postId = req.body.postId;
     const userId =  req.body.userId;
     const message = req.body.message;
-    const emptyAuthor = {username: ""}
-    // console.log(req.body)
 
-    const comment = new Comment({ postId, userId, message, emptyAuthor });
+    const comment = new Comment({ postId, userId, message });
     comment
         .save()
         .then((comment) => {
