@@ -46,3 +46,23 @@ li {
     align-items: center;
     margin-bottom: 10px;
 }
+
+.followers-container{
+    width: 60%;
+    margin:auto;
+}
+
+.user-profile-container{
+    background-color: white;
+    width: 60%;
+    margin: 20px auto;
+    border:1px solid black;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(14, 249, 104, 1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+.user-profile-container:hover{
+    transform: translateY(5px); 
+    box-shadow: 0 6px 12px rgba(255, 255, 0, 1);
+}

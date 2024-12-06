@@ -52,13 +52,19 @@ export const UserProfile = () => {
 
     return (
         <div>
+        <video autoPlay muted loop id="bgvid">
+        <source src="../acebook-background3.mp4" type="video/mp4" />
+        </video>
         <Header/>
+        <div className="user-profile-container">
         <h1>{user.username}</h1>
         <img className="user-photo" src={user.photo || defaultAvatar} alt="photo of user"/>
         <p>Email: {user.email}</p>
         {user._id != loggedInUser && (
         <button className={isFriend ? "friend": "add-friend"} onClick={handleAddFriend} disabled={isFriend}>{isFriend ? "Already Following" : "Follow"}</button>
         )}
+        <div className="followers-container">
+
         <h2>Followers</h2>
         {friends.length > 0 ? (
             <ul>
@@ -76,6 +82,9 @@ export const UserProfile = () => {
         ) : (
         <p>No followers yet.</p>
         )}
+        </div>
+
+        </div>
     </div>
     );
 };
