@@ -95,7 +95,7 @@ function Comment(props) {
     onChange={(event) => setCurrentComment(event.target.value)}>
     </textarea>
     <div className="comment-date-time">
-        <p>Commented on: {formattedDate}</p>
+        <p className="comment-date">Commented on: {formattedDate}</p>
     </div>
     {props.comment.userId === props.userID && (
         <div className="edit-delete-container">

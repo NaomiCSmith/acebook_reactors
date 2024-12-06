@@ -103,3 +103,7 @@ font-weight: bold;
 background-color: yellow;
 border: 1px solid black;
 }
+
+.no-followers{
+  font-size: 1em;
+}

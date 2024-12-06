@@ -95,6 +95,9 @@ export const Profile = () => {
 
   return (
     <>
+      <video autoPlay muted loop id="bgvid">
+        <source src="../acebook-background3.mp4" type="video/mp4" />
+      </video>
       <Header />
       <div className="container-fluid mt-5">
         <div className="row justify-content-center">
@@ -200,7 +203,7 @@ export const Profile = () => {
                         ))}
                       </ul>
                     ) : (
-                      <p>No followers yet.</p>
+                      <p className="no-followers">No followers yet.</p>
                     )}
                     <div className="text-center mt-4">
                       <button className="btn btn-lg edit-button" onClick={() => setIsEditing(true)}>

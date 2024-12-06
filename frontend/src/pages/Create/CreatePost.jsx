@@ -54,11 +54,14 @@ const userId = localStorage.getItem("userID");
     
     return (
     <>
+        <video autoPlay muted loop id="bgvid">
+        <source src="../acebook-background3.mp4" type="video/mp4" />
+        </video>
         <Header />
-        {createdPost ? <h2>Post successfully created!</h2> : null}
-        {returnedPost ? <Link to='/posts'><h3 className="return">Return to Posts</h3></Link> : null}
-        <h1>Submit a post:</h1>
+        {createdPost ? <h2 className="post-created">Post successfully created!</h2> : null}
+        {returnedPost ? <Link to='/posts'><h3 className="return">Click here to return to posts</h3></Link> : null}
         <form className="post-form" onSubmit={handleSubmit}>
+        <p>Submit a post:</p>
         <label htmlFor='post-body'>
             <br />
             <textarea

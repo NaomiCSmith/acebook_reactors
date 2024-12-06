@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signupUser } from "../../services/users"; 
 import NoLoginHeader from "../../components/NoLoginHeader"
+import "./SignupPage.css"
 
 export function SignupPage() {
   const [email, setEmail] = useState("");
@@ -42,9 +43,9 @@ export function SignupPage() {
   return (
     <div>
       <NoLoginHeader />
-      <h2>Signup</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <form onSubmit={handleSubmit}>
+      <form className="sign-up-form"onSubmit={handleSubmit}>
+        <h2>Signup</h2>
         <label htmlFor="username">Username:</label>
         <input
           id="username"

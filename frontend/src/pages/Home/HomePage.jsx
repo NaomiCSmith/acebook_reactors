@@ -10,7 +10,7 @@ export function HomePage() {
         <img src={logo} alt="Acebook Logo" className="logo" />
         <p className="tagline">Connect and share with the devs in your life, Acebook style.</p>
       </div>
-      <div className="button-container">
+      <div className="button-container-home">
         <Link to="/signup" className="signup-button">Create New Account</Link>
         <Link to="/login" className="login-button">Log In</Link>
       </div>
