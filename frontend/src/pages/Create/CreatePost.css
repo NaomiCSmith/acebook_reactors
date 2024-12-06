@@ -1,12 +1,14 @@
 .post-form{
     border: 1px solid black;
-    margin: 10px 10px;
+    margin: 10px auto;
     border-radius: 8px;
     font-size: 18px;
     box-shadow: 0 6px 12px rgba(14, 249, 104, 1);
+    background-color: white;
+    width: 60%;
 }
 
-h1{
+p{
     font-family: 'Roboto', sans-serif;
     text-align: center;
     color: #333;
@@ -36,8 +38,21 @@ h1{
 .return{
     background-color: #0ef968;
     color: black;
+    width: 60%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    margin:auto;
 }
 
 .return:hover{
     background-color: yellow;
+}
+
+.post-created{
+    margin: 20px auto 0px auto;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #0ef968;
+    color: black;
+    width: 60%;
 }

@@ -34,6 +34,9 @@ export function WelcomePage() {
 
     return (
         <>
+        <video autoPlay muted loop id="bgvid">
+        <source src="../acebook-background3.mp4" type="video/mp4" />
+        </video>
         <div className="header">
             <Header />
         </div>

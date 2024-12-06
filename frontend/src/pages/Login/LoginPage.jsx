@@ -37,8 +37,8 @@ export function LoginPage() {
   return (
     <>
     <NoLoginHeader />
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="log-in-form"onSubmit={handleSubmit}>
+        <h2>Login</h2>
         <label htmlFor="email">Email:</label>
         <input
           id="email"

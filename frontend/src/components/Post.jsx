@@ -91,7 +91,7 @@ const handleAuthorClick = () => {
   </div>
   <br />
   <div className="post-date-time">
-    <p>Posted: {formattedDate}</p>
+    <p className="posted-date">Posted: {formattedDate}</p>
   </div>
   </div>
   )

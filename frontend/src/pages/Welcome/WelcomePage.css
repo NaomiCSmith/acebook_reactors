@@ -1,12 +1,30 @@
 .welcome {
     display: flex;
     flex-direction: column;
+    background-color: white;
+    width:60%;
+    margin: 20px auto 0px auto;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding-top: 10px;
 }
 
 .button-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: white;
+    width:60%;
+    margin: 0px auto;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
     }
 
 .profile-button,

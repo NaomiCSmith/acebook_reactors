@@ -60,3 +60,7 @@ img:hover{
 .show-comment-img:hover{
     transform: translateY(-5px); 
 }
+
+.no-comments{
+    font-size: 1em;
+}

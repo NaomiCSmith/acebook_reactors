@@ -86,7 +86,7 @@ const CommentButton = ({ post, userID, token }) => {
                             </div>
                         ))
                     ) : (
-                        <p>No comments yet. Be the first to comment!</p>
+                        <p className="no-comments">No comments yet. Be the first to comment!</p>
                     )}
 
                     <button className="add-comment" onClick={toggleCommentForm}>

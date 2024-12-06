@@ -41,8 +41,10 @@ const handlePostDeleted = (postId) => {
       <div>
         <Header />
       </div>
+      <video autoPlay muted loop id="bgvid">
+        <source src="../acebook-background3.mp4" type="video/mp4" />
+      </video>
       <div className="feed-container">
-        <h2 className="text-center">Posts</h2>
         <div className="action-buttons text-center">
           <Link to="/createpost">
             <button className="btn create-post">Write post</button>
